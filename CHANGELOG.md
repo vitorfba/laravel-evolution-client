@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.1] - 2026-07-08
+
+### Fixed
+- Move the Laravel Boost skill to the expected
+  `resources/boost/skills/laravel-evolution-client/SKILL.md` path so Boost auto-discovers
+  and publishes it on install.
+
 ## [3.0.0] - 2026-07-08
 
 ### Added
@@ -25,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `toggleEphemeral()`, `updateSetting()`.
 - Developer tooling: `AGENTS.md` + `CLAUDE.md` guides, `.claude/`, `.opencode/` and
   `.antigravity/` agent configurations, and a Laravel Boost skill at
-  `resources/boost/laravel-evolution-client/SKILL.md`.
+  `resources/boost/skills/laravel-evolution-client/SKILL.md`.
 
 ### Changed
 - **Tooling:** replaced `friendsofphp/php-cs-fixer` with **Laravel Pint** (`pint.json`) and

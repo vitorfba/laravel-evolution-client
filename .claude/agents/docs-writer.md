@@ -16,7 +16,7 @@ You maintain the docs for `happones/laravel-evolution-client`.
   `### Added / Changed / Fixed / Removed`.
 - **`AGENTS.md`** — the agent source of truth. Update it when conventions or the workflow
   change; other agent files reference it, so don't duplicate.
-- **`resources/boost/laravel-evolution-client/SKILL.md`** — the Laravel Boost skill that
+- **`resources/boost/skills/laravel-evolution-client/SKILL.md`** — the Laravel Boost skill that
   ships with the package (auto-published on install). Keep the documented facade methods,
   arguments and examples accurate to the code.
 
