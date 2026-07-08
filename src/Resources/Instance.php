@@ -154,7 +154,9 @@ class Instance
      */
     public function restart(): array
     {
-        return $this->service->put("/instance/restart/{$this->instanceName}");
+        // Evolution API v2 (deployed builds) expose restart as POST; the OpenAPI
+        // spec lists PUT, but the running server returns 404 for PUT.
+        return $this->service->post("/instance/restart/{$this->instanceName}");
     }
 
     /**
@@ -196,7 +198,7 @@ class Instance
         bool $base64 = false,
         bool $webhookByEvents = false
     ): array {
-        $payload = [
+        $webhook = [
             'enabled' => $enabled,
             'url' => $url,
             'webhookByEvents' => $webhookByEvents,
@@ -205,10 +207,11 @@ class Instance
         ];
 
         if (! empty($headers)) {
-            $payload['headers'] = $headers;
+            $webhook['headers'] = $headers;
         }
 
-        return $this->service->post("/webhook/set/{$this->instanceName}", $payload);
+        // Evolution API v2 requires the configuration nested under "webhook".
+        return $this->service->post("/webhook/set/{$this->instanceName}", ['webhook' => $webhook]);
     }
 
     /**

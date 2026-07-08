@@ -131,6 +131,32 @@ class InstanceResourceTest extends TestCase
     }
 
     /** @test */
+    public function it_sends_webhook_config_nested_under_the_webhook_key()
+    {
+        $service = $this->getMockBuilder(EvolutionService::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $service->expects($this->once())
+            ->method('post')
+            ->with(
+                '/webhook/set/test-instance',
+                $this->callback(function ($payload) {
+                    return isset($payload['webhook'])
+                        && $payload['webhook']['url'] === 'https://example.com/webhook'
+                        && $payload['webhook']['enabled'] === true
+                        && $payload['webhook']['events'] === ['MESSAGES_UPSERT']
+                        && array_key_exists('webhookByEvents', $payload['webhook'])
+                        && array_key_exists('webhookBase64', $payload['webhook']);
+                })
+            )
+            ->willReturn(['status' => 'success']);
+
+        $resource = new Instance($service, 'test-instance');
+        $resource->setWebhook('https://example.com/webhook', ['MESSAGES_UPSERT']);
+    }
+
+    /** @test */
     public function it_can_get_webhook()
     {
         $result = $this->instanceResource->getWebhook();
