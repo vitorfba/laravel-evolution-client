@@ -2,17 +2,12 @@
 
 namespace Happones\LaravelEvolutionClient\Models;
 
+use InvalidArgumentException;
+
 class PrivacySettings extends Profile
 {
     /**
      * Create a new PrivacySettings instance.
-     *
-     * @param string $readreceipts
-     * @param string $profile
-     * @param string $status
-     * @param string $online
-     * @param string $last
-     * @param string $groupadd
      */
     public function __construct(
         string $readreceipts,
@@ -32,20 +27,17 @@ class PrivacySettings extends Profile
 
         parent::__construct([
             'readreceipts' => $readreceipts,
-            'profile'      => $profile,
-            'status'       => $status,
-            'online'       => $online,
-            'last'         => $last,
-            'groupadd'     => $groupadd,
+            'profile' => $profile,
+            'status' => $status,
+            'online' => $online,
+            'last' => $last,
+            'groupadd' => $groupadd,
         ]);
     }
 
     /**
      * Validate a privacy option.
      *
-     * @param string $option
-     * @param string $value
-     * @param array  $allowedValues
      *
      * @throws InvalidArgumentException
      */

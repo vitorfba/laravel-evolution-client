@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Resources/WebSocketResourceTest.php
 
 namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
@@ -65,15 +66,15 @@ class WebSocketResourceTest extends TestCase
             ->getMock();
 
         $this->service->method('post')->willReturn([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'WebSocket settings updated',
         ]);
 
         $this->service->method('get')->willReturn([
-            'status'    => 'success',
+            'status' => 'success',
             'websocket' => [
                 'enabled' => true,
-                'events'  => ['message', 'message.ack'],
+                'events' => ['message', 'message.ack'],
             ],
         ]);
 

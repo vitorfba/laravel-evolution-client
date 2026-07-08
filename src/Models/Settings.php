@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/Settings.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -12,14 +13,6 @@ class Settings
 
     /**
      * Create a new Settings instance.
-     *
-     * @param bool        $rejectCall
-     * @param string|null $msgCall
-     * @param bool        $groupsIgnore
-     * @param bool        $alwaysOnline
-     * @param bool        $readMessages
-     * @param bool        $syncFullHistory
-     * @param bool        $readStatus
      */
     public function __construct(
         bool $rejectCall = false,
@@ -31,12 +24,12 @@ class Settings
         bool $readStatus = false
     ) {
         $this->attributes = [
-            'rejectCall'      => $rejectCall,
-            'groupsIgnore'    => $groupsIgnore,
-            'alwaysOnline'    => $alwaysOnline,
-            'readMessages'    => $readMessages,
+            'rejectCall' => $rejectCall,
+            'groupsIgnore' => $groupsIgnore,
+            'alwaysOnline' => $alwaysOnline,
+            'readMessages' => $readMessages,
             'syncFullHistory' => $syncFullHistory,
-            'readStatus'      => $readStatus,
+            'readStatus' => $readStatus,
         ];
 
         if ($msgCall !== null) {
@@ -46,8 +39,6 @@ class Settings
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {

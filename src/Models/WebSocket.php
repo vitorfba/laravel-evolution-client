@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/WebSocket.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -17,26 +18,21 @@ class WebSocket
 
     /**
      * Create a new WebSocket instance.
-     *
-     * @param bool  $enabled
-     * @param array $events
      */
     public function __construct(bool $enabled, array $events = [])
     {
         $this->enabled = $enabled;
-        $this->events  = $events;
+        $this->events = $events;
     }
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {
         return [
             'enabled' => $this->enabled,
-            'events'  => $this->events,
+            'events' => $this->events,
         ];
     }
 }

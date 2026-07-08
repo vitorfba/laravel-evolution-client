@@ -1,4 +1,5 @@
 <?php
+
 // src/Resources/WebSocket.php
 
 namespace Happones\LaravelEvolutionClient\Resources;
@@ -22,20 +23,15 @@ class WebSocket
 
     /**
      * Create a new WebSocket resource instance.
-     *
-     * @param EvolutionService $service
-     * @param string           $instanceName
      */
     public function __construct(EvolutionService $service, string $instanceName)
     {
-        $this->service      = $service;
+        $this->service = $service;
         $this->instanceName = $instanceName;
     }
 
     /**
      * Get the instance name.
-     *
-     * @return string
      */
     public function getInstanceName(): string
     {
@@ -44,10 +40,6 @@ class WebSocket
 
     /**
      * Set the instance name.
-     *
-     * @param string $instanceName
-     *
-     * @return void
      */
     public function setInstanceName(string $instanceName): void
     {
@@ -57,12 +49,8 @@ class WebSocket
     /**
      * Configure WebSocket settings.
      *
-     * @param bool  $enabled
-     * @param array $events
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function setWebSocket(bool $enabled, array $events = []): array
     {
@@ -75,8 +63,6 @@ class WebSocket
      * Get WebSocket settings.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function findWebSocket(): array
     {
@@ -86,8 +72,6 @@ class WebSocket
     /**
      * Create a WebSocket client.
      *
-     * @param int   $maxRetries
-     * @param float $retryDelay
      *
      * @return mixed
      */

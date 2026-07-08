@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(composer test)",
+      "Bash(composer test-coverage)",
+      "Bash(composer lint)",
+      "Bash(composer analyse)",
+      "Bash(composer format)",
+      "Bash(vendor/bin/pest:*)",
+      "Bash(vendor/bin/pint:*)",
+      "Bash(vendor/bin/phpstan:*)",
+      "Bash(php -d memory_limit=1G vendor/bin/phpstan:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Bash(git describe:*)"
+    ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(git tag:*)"
+    ],
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git tag -d:*)",
+      "Bash(git push origin :*)"
+    ]
+  }
+}

@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/QuotedMessage.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -12,9 +13,6 @@ class QuotedMessage
 
     /**
      * Create a new QuotedMessage instance.
-     *
-     * @param array      $key
-     * @param array|null $message
      */
     public function __construct(array $key, ?array $message = null)
     {
@@ -27,8 +25,6 @@ class QuotedMessage
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {

@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Resources/LabelResourceTest.php
 
 namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
@@ -68,15 +69,15 @@ class LabelResourceTest extends TestCase
             'status' => 'success',
             'labels' => [
                 [
-                    'id'    => 'label-id-123',
-                    'name'  => 'Important',
+                    'id' => 'label-id-123',
+                    'name' => 'Important',
                     'color' => 4,
                 ],
             ],
         ]);
 
         $this->service->method('post')->willReturn([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'Label operation successful',
         ]);
 

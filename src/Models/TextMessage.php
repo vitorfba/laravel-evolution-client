@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/TextMessage.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -12,14 +13,6 @@ class TextMessage
 
     /**
      * Create a new TextMessage instance.
-     *
-     * @param string             $number
-     * @param string             $text
-     * @param int|null           $delay
-     * @param QuotedMessage|null $quoted
-     * @param bool|null          $linkPreview
-     * @param bool|null          $mentionsEveryOne
-     * @param array|null         $mentioned
      */
     public function __construct(
         string $number,
@@ -32,7 +25,7 @@ class TextMessage
     ) {
         $this->attributes = [
             'number' => $number,
-            'text'   => $text,
+            'text' => $text,
         ];
 
         if ($delay !== null) {
@@ -58,8 +51,6 @@ class TextMessage
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {

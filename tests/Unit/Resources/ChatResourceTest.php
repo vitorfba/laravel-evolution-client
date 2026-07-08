@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Resources/ChatResourceTest.php
 
 namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
@@ -51,10 +52,113 @@ class ChatResourceTest extends TestCase
     /** @test */
     public function it_can_mark_chat_as_read()
     {
-        $result = $this->chatResource->markAsRead('5511999999999');
+        $result = $this->chatResource->markAsRead([
+            [
+                'remoteJid' => '5511999999999@c.us',
+                'fromMe' => false,
+                'id' => 'ABC123',
+            ],
+        ]);
 
         $this->assertIsArray($result);
         $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_mark_chat_unread()
+    {
+        $result = $this->chatResource->markChatUnread('5511999999999@c.us', [
+            [
+                'remoteJid' => '5511999999999@c.us',
+                'fromMe' => false,
+                'id' => 'ABC123',
+            ],
+        ]);
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_archive_chat()
+    {
+        $result = $this->chatResource->archive('5511999999999@c.us', [
+            'remoteJid' => '5511999999999@c.us',
+            'fromMe' => false,
+            'id' => 'ABC123',
+        ]);
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_unarchive_chat()
+    {
+        $result = $this->chatResource->unarchive('5511999999999@c.us', [
+            'remoteJid' => '5511999999999@c.us',
+            'fromMe' => false,
+            'id' => 'ABC123',
+        ]);
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_update_message()
+    {
+        $result = $this->chatResource->updateMessage('5511999999999', 'Edited text', [
+            'remoteJid' => '5511999999999@c.us',
+            'fromMe' => true,
+            'id' => 'ABC123',
+        ]);
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_fetch_profile_picture_url()
+    {
+        $result = $this->chatResource->fetchProfilePictureUrl('5511999999999');
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_find_status_message()
+    {
+        $result = $this->chatResource->findStatusMessage(['id' => 'ABC123'], 10);
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_get_base64_from_media_message()
+    {
+        $result = $this->chatResource->getBase64FromMediaMessage('ABC123', true);
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_update_block_status()
+    {
+        $result = $this->chatResource->updateBlockStatus('5511999999999', 'block');
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_validates_block_status_value()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->chatResource->updateBlockStatus('5511999999999', 'invalid');
     }
 
     /** @test */
@@ -121,10 +225,10 @@ class ChatResourceTest extends TestCase
 
         $this->service->method('get')->willReturn([
             'status' => 'success',
-            'chats'  => [
+            'chats' => [
                 [
-                    'id'          => '5511999999999@c.us',
-                    'name'        => 'Contact Name',
+                    'id' => '5511999999999@c.us',
+                    'name' => 'Contact Name',
                     'unreadCount' => 0,
                 ],
             ],
@@ -132,8 +236,8 @@ class ChatResourceTest extends TestCase
                 [
                     'key' => [
                         'remoteJid' => '5511999999999@c.us',
-                        'fromMe'    => true,
-                        'id'        => '12345',
+                        'fromMe' => true,
+                        'id' => '12345',
                     ],
                     'message' => [
                         'conversation' => 'Hello',
@@ -144,7 +248,7 @@ class ChatResourceTest extends TestCase
         ]);
 
         $this->service->method('post')->willReturn([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'Operation successful',
         ]);
 

@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Resources/BusinessResourceTest.php
 
 namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
@@ -40,7 +41,7 @@ class BusinessResourceTest extends TestCase
                 $this->equalTo(['number' => '5511999999999@c.us'])
             )
             ->willReturn([
-                'status'  => 'success',
+                'status' => 'success',
                 'catalog' => [],
             ]);
 
@@ -59,12 +60,12 @@ class BusinessResourceTest extends TestCase
                 $this->equalTo('/business/getCatalog/test-instance'),
                 $this->equalTo([
                     'number' => '5511999999999@c.us',
-                    'limit'  => 20,
+                    'limit' => 20,
                     'cursor' => 'next-cursor-token',
                 ])
             )
             ->willReturn([
-                'status'  => 'success',
+                'status' => 'success',
                 'catalog' => [],
             ]);
 
@@ -84,7 +85,7 @@ class BusinessResourceTest extends TestCase
                 $this->equalTo(['number' => '5511999999999@c.us'])
             )
             ->willReturn([
-                'status'      => 'success',
+                'status' => 'success',
                 'collections' => [],
             ]);
 
@@ -103,12 +104,12 @@ class BusinessResourceTest extends TestCase
                 $this->equalTo('/business/getCollections/test-instance'),
                 $this->equalTo([
                     'number' => '5511999999999@c.us',
-                    'limit'  => 10,
+                    'limit' => 10,
                     'cursor' => 'some-cursor',
                 ])
             )
             ->willReturn([
-                'status'      => 'success',
+                'status' => 'success',
                 'collections' => [],
             ]);
 

@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Resources/ProfileResourceTest.php
 
 namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
@@ -107,24 +108,24 @@ class ProfileResourceTest extends TestCase
             ->getMock();
 
         $this->service->method('post')->willReturn([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'Profile operation successful',
         ]);
 
         $this->service->method('get')->willReturn([
-            'status'   => 'success',
+            'status' => 'success',
             'settings' => [
                 'readreceipts' => 'all',
-                'profile'      => 'contacts',
-                'status'       => 'contacts',
-                'online'       => 'all',
-                'last'         => 'contacts',
-                'groupadd'     => 'contacts',
+                'profile' => 'contacts',
+                'status' => 'contacts',
+                'online' => 'all',
+                'last' => 'contacts',
+                'groupadd' => 'contacts',
             ],
         ]);
 
         $this->service->method('delete')->willReturn([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'Profile picture removed',
         ]);
 

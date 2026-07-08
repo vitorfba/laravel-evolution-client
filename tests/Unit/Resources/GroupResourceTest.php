@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Resources/GroupResourceTest.php
 
 namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
@@ -126,6 +127,94 @@ class GroupResourceTest extends TestCase
         $this->assertEquals('success', $result['status']);
     }
 
+    /** @test */
+    public function it_can_leave_group()
+    {
+        $result = $this->groupResource->leave('123456789@g.us');
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_get_invite_code()
+    {
+        $result = $this->groupResource->getInviteCode('123456789@g.us');
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_join_with_invite_code()
+    {
+        $result = $this->groupResource->joinWithInviteCode('ABC123');
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_update_group_picture()
+    {
+        $result = $this->groupResource->updateGroupPicture('123456789@g.us', 'https://example.com/pic.png');
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_revoke_invite_code()
+    {
+        $result = $this->groupResource->revokeInviteCode('123456789@g.us');
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_get_invite_info()
+    {
+        $result = $this->groupResource->inviteInfo('ABC123');
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_send_invite()
+    {
+        $result = $this->groupResource->sendInvite('123456789@g.us', 'Join us', ['5511999999999']);
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_toggle_ephemeral()
+    {
+        $result = $this->groupResource->toggleEphemeral('123456789@g.us', 86400);
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_update_setting()
+    {
+        $result = $this->groupResource->updateSetting('123456789@g.us', 'announcement');
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_validates_update_setting_action()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->groupResource->updateSetting('123456789@g.us', 'invalid');
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -138,24 +227,29 @@ class GroupResourceTest extends TestCase
             'status' => 'success',
             'groups' => [
                 [
-                    'id'       => '123456789@g.us',
-                    'subject'  => 'Test Group',
+                    'id' => '123456789@g.us',
+                    'subject' => 'Test Group',
                     'creation' => 1678901234,
-                    'owner'    => '5511999999999@c.us',
-                    'desc'     => 'Group description',
+                    'owner' => '5511999999999@c.us',
+                    'desc' => 'Group description',
                 ],
             ],
         ]);
 
         $this->service->method('post')->willReturn([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'Operation successful',
             'groupId' => '123456789@g.us',
         ]);
 
         $this->service->method('put')->willReturn([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'Group updated successfully',
+        ]);
+
+        $this->service->method('delete')->willReturn([
+            'status' => 'success',
+            'message' => 'Left group successfully',
         ]);
 
         $this->groupResource = new Group($this->service, 'test-instance');

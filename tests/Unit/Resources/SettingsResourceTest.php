@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Resources/SettingsResourceTest.php
 
 namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
@@ -54,20 +55,20 @@ class SettingsResourceTest extends TestCase
             ->getMock();
 
         $this->service->method('post')->willReturn([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'Settings updated',
         ]);
 
         $this->service->method('get')->willReturn([
-            'status'   => 'success',
+            'status' => 'success',
             'settings' => [
-                'rejectCall'      => true,
-                'msgCall'         => 'I do not accept calls',
-                'groupsIgnore'    => false,
-                'alwaysOnline'    => true,
-                'readMessages'    => false,
+                'rejectCall' => true,
+                'msgCall' => 'I do not accept calls',
+                'groupsIgnore' => false,
+                'alwaysOnline' => true,
+                'readMessages' => false,
                 'syncFullHistory' => false,
-                'readStatus'      => false,
+                'readStatus' => false,
             ],
         ]);
 

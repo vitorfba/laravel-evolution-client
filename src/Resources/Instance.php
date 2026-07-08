@@ -1,10 +1,12 @@
 <?php
+
 // src/Resources/Instance.php
 
 namespace Happones\LaravelEvolutionClient\Resources;
 
 use Happones\LaravelEvolutionClient\Exceptions\EvolutionApiException;
 use Happones\LaravelEvolutionClient\Services\EvolutionService;
+use InvalidArgumentException;
 
 class Instance
 {
@@ -20,20 +22,15 @@ class Instance
 
     /**
      * Create a new Instance resource instance.
-     *
-     * @param EvolutionService $service
-     * @param string           $instanceName
      */
     public function __construct(EvolutionService $service, string $instanceName)
     {
-        $this->service      = $service;
+        $this->service = $service;
         $this->instanceName = $instanceName;
     }
 
     /**
      * Get the current instance name.
-     *
-     * @return string
      */
     public function getInstanceName(): string
     {
@@ -42,10 +39,6 @@ class Instance
 
     /**
      * Set the instance name.
-     *
-     * @param string $instanceName
-     *
-     * @return void
      */
     public function setInstanceName(string $instanceName): void
     {
@@ -53,25 +46,47 @@ class Instance
     }
 
     /**
-     * @param string $instanceName
+     * Create a new instance.
+     *
+     * @param string $instanceName The instance name
+     * @param string $integration WhatsApp engine: WHATSAPP-BAILEYS|WHATSAPP-BUSINESS
+     * @param string|null $token Optional API key (created dynamically when empty)
+     * @param string|null $number Optional owner number with country code
+     * @param bool|null $qrcode Whether to create a QR Code automatically after creation
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
-    public function createInstance(string $instanceName): array
-    {
-        return $this->service->post("/instance/create", [
+    public function createInstance(
+        string $instanceName,
+        string $integration = 'WHATSAPP-BAILEYS',
+        ?string $token = null,
+        ?string $number = null,
+        ?bool $qrcode = null
+    ): array {
+        $payload = [
             'instanceName' => $instanceName,
-        ]);
+            'integration' => $integration,
+        ];
+
+        if ($token !== null) {
+            $payload['token'] = $token;
+        }
+
+        if ($number !== null) {
+            $payload['number'] = $number;
+        }
+
+        if ($qrcode !== null) {
+            $payload['qrcode'] = $qrcode;
+        }
+
+        return $this->service->post('/instance/create', $payload);
     }
 
     /**
      * Get the QR code for the instance.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function getQrCode(): array
     {
@@ -82,34 +97,30 @@ class Instance
      * Check if the instance is connected.
      *
      * @throws EvolutionApiException
-     *
-     * @return bool
      */
     public function isConnected(): bool
     {
         $status = $this->getStatus();
 
-        return isset($status['status']) && $status['status'] === 'connected';
+        $state = $status['instance']['state'] ?? $status['state'] ?? null;
+
+        return $state === 'open';
     }
 
     /**
-     * Get the status of the instance.
+     * Get the connection status of the instance.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function getStatus(): array
     {
-        return $this->service->get("/instance/status/{$this->instanceName}");
+        return $this->service->get("/instance/connectionState/{$this->instanceName}");
     }
 
     /**
      * Connect the instance.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function connect(): array
     {
@@ -120,8 +131,6 @@ class Instance
      * Disconnect the instance.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function disconnect(): array
     {
@@ -132,8 +141,6 @@ class Instance
      * Delete the instance.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function delete(): array
     {
@@ -144,49 +151,70 @@ class Instance
      * Restart the instance.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function restart(): array
     {
-        return $this->service->post("/instance/restart/{$this->instanceName}");
+        return $this->service->put("/instance/restart/{$this->instanceName}");
+    }
+
+    /**
+     * Set the presence for the instance.
+     *
+     * @param string $presence Presence value: available|unavailable
+     *
+     * @throws EvolutionApiException
+     * @throws InvalidArgumentException
+     */
+    public function setPresence(string $presence): array
+    {
+        if (! in_array($presence, ['available', 'unavailable'], true)) {
+            throw new InvalidArgumentException('Presence must be one of: available, unavailable');
+        }
+
+        return $this->service->post("/instance/setPresence/{$this->instanceName}", [
+            'presence' => $presence,
+        ]);
     }
 
     /**
      * Set the webhook URL for the instance.
      *
-     * @param string $url
-     * @param array  $events
-     * @param bool   $enabled
-     * @param array  $headers
-     * @param bool   $base64
+     * @param string $url Webhook URL
+     * @param array<int, string> $events Events to be sent to the webhook
+     * @param bool $enabled Whether the webhook is enabled
+     * @param array<string, string> $headers Optional custom headers
+     * @param bool $base64 Whether to send files in base64 when available
+     * @param bool $webhookByEvents Whether to enable webhook by events
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function setWebhook(
         string $url,
         array $events = [],
         bool $enabled = true,
         array $headers = [],
-        bool $base64 = false
+        bool $base64 = false,
+        bool $webhookByEvents = false
     ): array {
-        return $this->service->post("/webhook/set/{$this->instanceName}", [
+        $payload = [
             'enabled' => $enabled,
-            'url'     => $url,
-            'events'  => $events,
-            'headers' => $headers,
-            'base64'  => $base64,
-        ]);
+            'url' => $url,
+            'webhookByEvents' => $webhookByEvents,
+            'webhookBase64' => $base64,
+            'events' => $events,
+        ];
+
+        if (! empty($headers)) {
+            $payload['headers'] = $headers;
+        }
+
+        return $this->service->post("/webhook/set/{$this->instanceName}", $payload);
     }
 
     /**
      * Get the webhook configuration for the instance.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function getWebhook(): array
     {
@@ -197,8 +225,6 @@ class Instance
      * Get the connection state of the instance.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function connectionState(): array
     {
@@ -209,8 +235,6 @@ class Instance
      * Fetch all instances.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function fetchInstances(): array
     {

@@ -1,4 +1,5 @@
 <?php
+
 // src/Facades/Evolution.php
 
 namespace Happones\LaravelEvolutionClient\Facades;
@@ -48,8 +49,6 @@ class Evolution extends Facade
 {
     /**
      * Get the registered name of the component.
-     *
-     * @return string
      */
     protected static function getFacadeAccessor(): string
     {

@@ -1,4 +1,5 @@
 <?php
+
 // src/Resources/Template.php
 
 namespace Happones\LaravelEvolutionClient\Resources;
@@ -20,20 +21,15 @@ class Template
 
     /**
      * Create a new Template resource instance.
-     *
-     * @param EvolutionService $service
-     * @param string           $instanceName
      */
     public function __construct(EvolutionService $service, string $instanceName)
     {
-        $this->service      = $service;
+        $this->service = $service;
         $this->instanceName = $instanceName;
     }
 
     /**
      * Get the instance name.
-     *
-     * @return string
      */
     public function getInstanceName(): string
     {
@@ -42,10 +38,6 @@ class Template
 
     /**
      * Set the instance name.
-     *
-     * @param string $instanceName
-     *
-     * @return void
      */
     public function setInstanceName(string $instanceName): void
     {
@@ -55,16 +47,8 @@ class Template
     /**
      * Create a template.
      *
-     * @param string      $name
-     * @param string      $category
-     * @param string      $language
-     * @param array       $components
-     * @param bool        $allowCategoryChange
-     * @param string|null $webhookUrl
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function create(
         string $name,
@@ -75,11 +59,11 @@ class Template
         ?string $webhookUrl = null
     ): array {
         $data = [
-            'name'                => $name,
-            'category'            => $category,
+            'name' => $name,
+            'category' => $category,
             'allowCategoryChange' => $allowCategoryChange,
-            'language'            => $language,
-            'components'          => $components,
+            'language' => $language,
+            'components' => $components,
         ];
 
         if ($webhookUrl !== null) {
@@ -93,8 +77,6 @@ class Template
      * Find templates.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function find(): array
     {
@@ -104,17 +86,13 @@ class Template
     /**
      * Edit an existing template.
      *
-     * @param string $name
-     * @param array  $components
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function edit(string $name, array $components): array
     {
         return $this->service->post("/template/edit/{$this->instanceName}", [
-            'name'       => $name,
+            'name' => $name,
             'components' => $components,
         ]);
     }
@@ -122,11 +100,8 @@ class Template
     /**
      * Delete a template.
      *
-     * @param string $name
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function delete(string $name): array
     {

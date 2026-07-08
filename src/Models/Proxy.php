@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/Proxy.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -37,13 +38,6 @@ class Proxy
 
     /**
      * Create a new Proxy instance.
-     *
-     * @param bool        $enabled
-     * @param string      $host
-     * @param string      $port
-     * @param string      $protocol
-     * @param string|null $username
-     * @param string|null $password
      */
     public function __construct(
         bool $enabled,
@@ -53,9 +47,9 @@ class Proxy
         ?string $username = null,
         ?string $password = null
     ) {
-        $this->enabled  = $enabled;
-        $this->host     = $host;
-        $this->port     = $port;
+        $this->enabled = $enabled;
+        $this->host = $host;
+        $this->port = $port;
         $this->protocol = $protocol;
         $this->username = $username;
         $this->password = $password;
@@ -63,15 +57,13 @@ class Proxy
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {
         $result = [
-            'enabled'  => $this->enabled,
-            'host'     => $this->host,
-            'port'     => $this->port,
+            'enabled' => $this->enabled,
+            'host' => $this->host,
+            'port' => $this->port,
             'protocol' => $this->protocol,
         ];
 

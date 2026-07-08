@@ -10,13 +10,14 @@ use Mockery;
 class OpenAIBotResourceTest extends TestCase
 {
     protected $mockService;
+
     protected $openAIBot;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->mockService = Mockery::mock(EvolutionService::class);
-        $this->openAIBot   = new OpenAIBot($this->mockService, 'default');
+        $this->openAIBot = new OpenAIBot($this->mockService, 'default');
     }
 
     public function test_it_can_create_a_bot()

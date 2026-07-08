@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/TemplateMessage.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -12,12 +13,6 @@ class TemplateMessage
 
     /**
      * Create a new TemplateMessage instance.
-     *
-     * @param string      $number
-     * @param string      $name
-     * @param string      $language
-     * @param array       $components
-     * @param string|null $webhookUrl
      */
     public function __construct(
         string $number,
@@ -27,9 +22,9 @@ class TemplateMessage
         ?string $webhookUrl = null
     ) {
         $this->attributes = [
-            'number'     => $number,
-            'name'       => $name,
-            'language'   => $language,
+            'number' => $number,
+            'name' => $name,
+            'language' => $language,
             'components' => $components,
         ];
 
@@ -40,8 +35,6 @@ class TemplateMessage
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {

@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/StatusMessage.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -12,14 +13,6 @@ class StatusMessage
 
     /**
      * Create a new StatusMessage instance.
-     *
-     * @param string      $type
-     * @param string      $content
-     * @param string|null $caption
-     * @param string|null $backgroundColor
-     * @param int|null    $font
-     * @param bool        $allContacts
-     * @param array|null  $statusJidList
      */
     public function __construct(
         string $type,
@@ -31,8 +24,8 @@ class StatusMessage
         ?array $statusJidList = null
     ) {
         $this->attributes = [
-            'type'        => $type,
-            'content'     => $content,
+            'type' => $type,
+            'content' => $content,
             'allContacts' => $allContacts,
         ];
 
@@ -55,8 +48,6 @@ class StatusMessage
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {

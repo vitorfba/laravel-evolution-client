@@ -1,4 +1,5 @@
 <?php
+
 // src/Resources/Business.php
 
 namespace Happones\LaravelEvolutionClient\Resources;
@@ -20,20 +21,15 @@ class Business
 
     /**
      * Create a new Business resource instance.
-     *
-     * @param EvolutionService $service
-     * @param string           $instanceName
      */
     public function __construct(EvolutionService $service, string $instanceName)
     {
-        $this->service      = $service;
+        $this->service = $service;
         $this->instanceName = $instanceName;
     }
 
     /**
      * Get the instance name.
-     *
-     * @return string
      */
     public function getInstanceName(): string
     {
@@ -42,10 +38,6 @@ class Business
 
     /**
      * Set the instance name.
-     *
-     * @param string $instanceName
-     *
-     * @return void
      */
     public function setInstanceName(string $instanceName): void
     {
@@ -55,13 +47,8 @@ class Business
     /**
      * Get business catalog.
      *
-     * @param string      $number
-     * @param int|null    $limit
-     * @param string|null $cursor
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function getCatalog(string $number, ?int $limit = null, ?string $cursor = null): array
     {
@@ -85,13 +72,8 @@ class Business
     /**
      * Get business collections.
      *
-     * @param string      $number
-     * @param int|null    $limit
-     * @param string|null $cursor
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function getCollections(string $number, ?int $limit = null, ?string $cursor = null): array
     {
@@ -114,10 +96,6 @@ class Business
 
     /**
      * Format phone number to be used with the API.
-     *
-     * @param string $phoneNumber
-     *
-     * @return string
      */
     protected function formatPhoneNumber(string $phoneNumber): string
     {

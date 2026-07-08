@@ -9,14 +9,8 @@ use PHPUnit\Framework\TestCase;
 
 class EvolutionBotResourceTest extends TestCase
 {
-    /**
-     * @var EvolutionBot
-     */
     protected EvolutionBot $evolutionBotResource;
 
-    /**
-     * @var EvolutionService|MockObject
-     */
     protected EvolutionService|MockObject $service;
 
     /** @test */
@@ -34,8 +28,8 @@ class EvolutionBotResourceTest extends TestCase
     /** @test */
     public function it_can_update_evolution_bot()
     {
-        $evolutionBotId     = 'bot_to_update_456';
-        $payload            = $this->getBotDataPayload();
+        $evolutionBotId = 'bot_to_update_456';
+        $payload = $this->getBotDataPayload();
         $payload['enabled'] = false; // A change for the update
 
         $result = $this->evolutionBotResource->update($evolutionBotId, ...$payload);
@@ -71,16 +65,16 @@ class EvolutionBotResourceTest extends TestCase
 
         $this->service->method('post')->willReturn([
             'status' => 'success',
-            'bot'    => ['id' => 'bot_created_123', 'enabled' => true],
+            'bot' => ['id' => 'bot_created_123', 'enabled' => true],
         ]);
 
         $this->service->method('put')->willReturn([
             'status' => 'success',
-            'bot'    => ['id' => 'bot_to_update_456', 'enabled' => false],
+            'bot' => ['id' => 'bot_to_update_456', 'enabled' => false],
         ]);
 
         $this->service->method('delete')->willReturn([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'Bot deleted successfully.',
         ]);
 
@@ -89,26 +83,24 @@ class EvolutionBotResourceTest extends TestCase
 
     /**
      * Returns an array of sample data for creating/updating a bot.
-     *
-     * @return array
      */
     private function getBotDataPayload(): array
     {
         return [
-            'enabled'         => true,
-            'apiUrl'          => 'https://test.com/api',
-            'apiKey'          => 'test-api-key',
-            'triggerType'     => 'keyword',
+            'enabled' => true,
+            'apiUrl' => 'https://test.com/api',
+            'apiKey' => 'test-api-key',
+            'triggerType' => 'keyword',
             'triggerOperator' => 'equals',
-            'triggerValue'    => '!test',
-            'expire'          => 300,
-            'keywordFinish'   => '!exit',
-            'delayMessage'    => 1000,
-            'unknownMessage'  => 'Unknown command',
+            'triggerValue' => '!test',
+            'expire' => 300,
+            'keywordFinish' => '!exit',
+            'delayMessage' => 1000,
+            'unknownMessage' => 'Unknown command',
             'listeningFromMe' => false,
-            'stopBotFromMe'   => true,
-            'keepOpen'        => false,
-            'debounceTime'    => 500,
+            'stopBotFromMe' => true,
+            'keepOpen' => false,
+            'debounceTime' => 500,
         ];
     }
 }

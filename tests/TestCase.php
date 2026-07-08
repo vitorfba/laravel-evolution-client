@@ -1,4 +1,5 @@
 <?php
+
 // tests/TestCase.php
 
 namespace Happones\LaravelEvolutionClient\Tests;
@@ -35,13 +36,13 @@ abstract class TestCase extends BaseTestCase
 
         $this->mockHandler = new MockHandler([
             new Response(200, [], json_encode([
-                'status'  => 'success',
+                'status' => 'success',
                 'message' => 'Mock response',
             ])),
         ]);
 
         $handlerStack = HandlerStack::create($this->mockHandler);
-        $httpClient   = new Client(['handler' => $handlerStack]);
+        $httpClient = new Client(['handler' => $handlerStack]);
 
         $this->service = $this->getMockBuilder(EvolutionService::class)
             ->setConstructorArgs(['http://localhost:8080', 'test-api-key', 30])
@@ -55,7 +56,6 @@ abstract class TestCase extends BaseTestCase
      * Get package providers.
      *
      * @param Application $app
-     *
      * @return array
      */
     protected function getPackageProviders($app)
@@ -69,7 +69,6 @@ abstract class TestCase extends BaseTestCase
      * Get package aliases.
      *
      * @param Application $app
-     *
      * @return array
      */
     protected function getPackageAliases($app)
@@ -83,7 +82,6 @@ abstract class TestCase extends BaseTestCase
      * Define environment setup.
      *
      * @param Application $app
-     *
      * @return void
      */
     protected function getEnvironmentSetUp($app)
@@ -97,9 +95,6 @@ abstract class TestCase extends BaseTestCase
     /**
      * Add a mock response to the handler.
      *
-     * @param array $body
-     * @param int   $status
-     * @param array $headers
      *
      * @return self
      */
@@ -120,7 +115,7 @@ abstract class TestCase extends BaseTestCase
     protected function createMockService()
     {
         $mockResponse = [
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'Mock response',
         ];
 

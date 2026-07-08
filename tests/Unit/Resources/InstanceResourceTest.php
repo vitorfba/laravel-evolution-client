@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Resources/InstanceResourceTest.php
 
 namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
@@ -45,12 +46,31 @@ class InstanceResourceTest extends TestCase
             ->getMock();
 
         $this->service->method('get')->willReturn([
-            'status' => 'connected',
+            'instance' => [
+                'instanceName' => 'test-instance',
+                'state' => 'open',
+            ],
         ]);
 
         $this->instanceResource = new Instance($this->service, 'test-instance');
 
         $this->assertTrue($this->instanceResource->isConnected());
+    }
+
+    /** @test */
+    public function it_can_set_presence()
+    {
+        $result = $this->instanceResource->setPresence('available');
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_validates_presence_value()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->instanceResource->setPresence('invalid');
     }
 
     /** @test */
@@ -151,12 +171,17 @@ class InstanceResourceTest extends TestCase
         ]);
 
         $this->service->method('post')->willReturn([
-            'status'  => 'success',
+            'status' => 'success',
+            'message' => 'Operation successful',
+        ]);
+
+        $this->service->method('put')->willReturn([
+            'status' => 'success',
             'message' => 'Operation successful',
         ]);
 
         $this->service->method('delete')->willReturn([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'Instance operation successful',
         ]);
 

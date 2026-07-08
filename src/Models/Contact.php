@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/Contact.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -37,13 +38,6 @@ class Contact
 
     /**
      * Create a new Contact instance.
-     *
-     * @param string      $fullName
-     * @param string      $wuid
-     * @param string      $phoneNumber
-     * @param string|null $organization
-     * @param string|null $email
-     * @param string|null $url
      */
     public function __construct(
         string $fullName,
@@ -53,24 +47,22 @@ class Contact
         ?string $email = null,
         ?string $url = null
     ) {
-        $this->fullName     = $fullName;
-        $this->wuid         = $wuid;
-        $this->phoneNumber  = $phoneNumber;
+        $this->fullName = $fullName;
+        $this->wuid = $wuid;
+        $this->phoneNumber = $phoneNumber;
         $this->organization = $organization;
-        $this->email        = $email;
-        $this->url          = $url;
+        $this->email = $email;
+        $this->url = $url;
     }
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {
         $attributes = [
-            'fullName'    => $this->fullName,
-            'wuid'        => $this->wuid,
+            'fullName' => $this->fullName,
+            'wuid' => $this->wuid,
             'phoneNumber' => $this->phoneNumber,
         ];
 

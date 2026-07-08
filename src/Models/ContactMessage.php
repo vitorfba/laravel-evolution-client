@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/ContactMessage.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -12,9 +13,6 @@ class ContactMessage
 
     /**
      * Create a new ContactMessage instance.
-     *
-     * @param string $number
-     * @param array  $contacts
      */
     public function __construct(string $number, array $contacts)
     {
@@ -29,15 +27,13 @@ class ContactMessage
         }
 
         $this->attributes = [
-            'number'  => $number,
+            'number' => $number,
             'contact' => $contactsArray,
         ];
     }
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {

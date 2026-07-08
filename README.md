@@ -2,7 +2,8 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/happones/laravel-evolution-client.svg?style=flat-square)](https://packagist.org/packages/happones/laravel-evolution-client)
 [![run-tests](https://github.com/happones/laravel-evolution-client/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/happones/laravel-evolution-client/actions/workflows/run-tests.yml)
-[![Check & fix styling](https://github.com/happones/laravel-evolution-client/actions/workflows/php-cs-fixer.yml/badge.svg?branch=main)](https://github.com/happones/laravel-evolution-client/actions/workflows/php-cs-fixer.yml)
+[![Fix PHP code style issues](https://github.com/happones/laravel-evolution-client/actions/workflows/fix-php-code-style-issues.yml/badge.svg?branch=main)](https://github.com/happones/laravel-evolution-client/actions/workflows/fix-php-code-style-issues.yml)
+[![PHPStan](https://github.com/happones/laravel-evolution-client/actions/workflows/phpstan.yml/badge.svg?branch=main)](https://github.com/happones/laravel-evolution-client/actions/workflows/phpstan.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/happones/laravel-evolution-client.svg?style=flat-square)](https://packagist.org/packages/happones/laravel-evolution-client)
 
 A Laravel client for the Evolution API, providing simple integration with WhatsApp for messaging, group management, and more.
@@ -477,9 +478,72 @@ Evolution::proxy->set(
 $proxy = Evolution::proxy->find();
 ```
 
+### Handling Webhooks
+
+Evolution API delivers events (incoming messages, connection changes, QR updates, …) to a
+URL you configure. This package parses those payloads into a typed `WebhookEvent` and
+exposes them for use.
+
+**1. Register the endpoint.** Enable the built-in route in `config/evolution.php`:
+
+```php
+'webhook' => [
+    'route' => [
+        'enabled'    => env('EVOLUTION_WEBHOOK_ROUTE_ENABLED', true),
+        'path'       => env('EVOLUTION_WEBHOOK_ROUTE_PATH', 'evolution/webhook'),
+        'middleware' => ['api'],
+    ],
+],
+```
+
+Point your instance webhook at `https://your-app.test/evolution/webhook`. (Or build your
+own controller and call `WebhookProcessor::process($request)` yourself.)
+
+**2. Listen for events.** Every webhook dispatches `EvolutionWebhookReceived`, plus a
+named `evolution.webhook.{event}` event:
+
+```php
+use Happones\LaravelEvolutionClient\Events\EvolutionWebhookReceived;
+use Happones\LaravelEvolutionClient\Webhook\WebhookEvent;
+
+Event::listen(function (EvolutionWebhookReceived $received) {
+    $event = $received->webhook;                 // WebhookEvent
+
+    if ($event->isMessageUpsert()) {
+        $from = $event->get('key.remoteJid');
+        $text = $event->get('message.conversation');
+        // ...
+    }
+});
+```
+
+Make your listener implement `ShouldQueue` to process it on a queue.
+
+**3. (Optional) Queue at the edge.** To return `200` to Evolution instantly and process
+off the request lifecycle, enable the queue — a `ProcessEvolutionWebhook` job is dispatched
+instead of running inline:
+
+```php
+'webhook' => [
+    'queue' => ['enabled' => env('EVOLUTION_WEBHOOK_QUEUE_ENABLED', true)],
+],
+```
+
+You can also register inline callbacks without Laravel events:
+
+```php
+app(\Happones\LaravelEvolutionClient\Webhook\WebhookProcessor::class)
+    ->on(WebhookEvent::MESSAGES_UPSERT, fn (WebhookEvent $e) => logger($e->toArray()))
+    ->onAny(fn (WebhookEvent $e) => logger("event: {$e->name()}"));
+```
+
 ## Testing
+
 ```bash
-composer test
+composer test        # Pest test suite
+composer lint        # Laravel Pint (code style, dry-run)
+composer analyse     # Larastan level 5 (static analysis)
+composer format      # apply Pint fixes
 ```
 
 ## Changelog

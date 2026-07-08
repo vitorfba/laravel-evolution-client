@@ -1,17 +1,20 @@
 <?php
+
 // src/EvolutionServiceProvider.php
 
 namespace Happones\LaravelEvolutionClient;
 
+use Happones\LaravelEvolutionClient\Http\Controllers\WebhookController;
 use Happones\LaravelEvolutionClient\Services\EvolutionService;
+use Happones\LaravelEvolutionClient\Webhook\WebhookProcessor;
+use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class EvolutionServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -32,12 +35,16 @@ class EvolutionServiceProvider extends ServiceProvider
                 config('evolution.default_instance')
             );
         });
+
+        // Register the webhook processor (parses inbound payloads + dispatches events)
+        $this->app->singleton(WebhookProcessor::class, function ($app) {
+            return new WebhookProcessor($app->make(Dispatcher::class));
+        });
+        $this->app->alias(WebhookProcessor::class, 'evolution.webhook');
     }
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -45,6 +52,16 @@ class EvolutionServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/evolution.php' => config_path('evolution.php'),
         ], 'evolution-config');
+
+        // Register the inbound webhook route when enabled
+        if (config('evolution.webhook.route.enabled')) {
+            Route::middleware(config('evolution.webhook.route.middleware', ['api']))
+                ->post(
+                    config('evolution.webhook.route.path', 'evolution/webhook'),
+                    WebhookController::class
+                )
+                ->name(config('evolution.webhook.route.name', 'evolution.webhook'));
+        }
 
         // Register commands if we're in console
         if ($this->app->runningInConsole()) {

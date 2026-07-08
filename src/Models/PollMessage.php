@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/PollMessage.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -12,13 +13,6 @@ class PollMessage
 
     /**
      * Create a new PollMessage instance.
-     *
-     * @param string             $number
-     * @param string             $name
-     * @param int                $selectableCount
-     * @param array              $values
-     * @param int|null           $delay
-     * @param QuotedMessage|null $quoted
      */
     public function __construct(
         string $number,
@@ -29,10 +23,10 @@ class PollMessage
         ?QuotedMessage $quoted = null
     ) {
         $this->attributes = [
-            'number'          => $number,
-            'name'            => $name,
+            'number' => $number,
+            'name' => $name,
             'selectableCount' => $selectableCount,
-            'values'          => $values,
+            'values' => $values,
         ];
 
         if ($delay !== null) {
@@ -46,8 +40,6 @@ class PollMessage
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {

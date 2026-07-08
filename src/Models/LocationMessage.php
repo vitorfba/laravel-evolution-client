@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/LocationMessage.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -12,14 +13,6 @@ class LocationMessage
 
     /**
      * Create a new LocationMessage instance.
-     *
-     * @param string             $number
-     * @param string             $name
-     * @param string             $address
-     * @param float              $latitude
-     * @param float              $longitude
-     * @param int|null           $delay
-     * @param QuotedMessage|null $quoted
      */
     public function __construct(
         string $number,
@@ -31,10 +24,10 @@ class LocationMessage
         ?QuotedMessage $quoted = null
     ) {
         $this->attributes = [
-            'number'    => $number,
-            'name'      => $name,
-            'address'   => $address,
-            'latitude'  => $latitude,
+            'number' => $number,
+            'name' => $name,
+            'address' => $address,
+            'latitude' => $latitude,
             'longitude' => $longitude,
         ];
 
@@ -49,8 +42,6 @@ class LocationMessage
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {

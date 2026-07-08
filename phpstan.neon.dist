@@ -1,0 +1,7 @@
+# Larastan configuration. Relies on phpstan/extension-installer to auto-register
+# larastan, phpstan-phpunit and phpstan-deprecation-rules.
+parameters:
+    level: 5
+    paths:
+        - src
+    tmpDir: build/phpstan

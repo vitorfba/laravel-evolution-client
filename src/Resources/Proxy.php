@@ -1,4 +1,5 @@
 <?php
+
 // src/Resources/Proxy.php
 
 namespace Happones\LaravelEvolutionClient\Resources;
@@ -21,20 +22,15 @@ class Proxy
 
     /**
      * Create a new Proxy resource instance.
-     *
-     * @param EvolutionService $service
-     * @param string           $instanceName
      */
     public function __construct(EvolutionService $service, string $instanceName)
     {
-        $this->service      = $service;
+        $this->service = $service;
         $this->instanceName = $instanceName;
     }
 
     /**
      * Get the instance name.
-     *
-     * @return string
      */
     public function getInstanceName(): string
     {
@@ -43,10 +39,6 @@ class Proxy
 
     /**
      * Set the instance name.
-     *
-     * @param string $instanceName
-     *
-     * @return void
      */
     public function setInstanceName(string $instanceName): void
     {
@@ -56,16 +48,8 @@ class Proxy
     /**
      * Set a proxy for the instance.
      *
-     * @param bool        $enabled
-     * @param string      $host
-     * @param string      $port
-     * @param string      $protocol
-     * @param string|null $username
-     * @param string|null $password
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function set(
         bool $enabled,
@@ -84,8 +68,6 @@ class Proxy
      * Find proxy settings for the instance.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function find(): array
     {

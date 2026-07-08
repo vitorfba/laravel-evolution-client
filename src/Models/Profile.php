@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/Profile.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -12,8 +13,6 @@ class Profile
 
     /**
      * Create a new Profile instance.
-     *
-     * @param array $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -22,8 +21,6 @@ class Profile
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {

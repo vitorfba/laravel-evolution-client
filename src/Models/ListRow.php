@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/ListRow.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -22,29 +23,23 @@ class ListRow
 
     /**
      * Create a new ListRow instance.
-     *
-     * @param string $title
-     * @param string $description
-     * @param string $rowId
      */
     public function __construct(string $title, string $description, string $rowId)
     {
-        $this->title       = $title;
+        $this->title = $title;
         $this->description = $description;
-        $this->rowId       = $rowId;
+        $this->rowId = $rowId;
     }
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {
         return [
-            'title'       => $this->title,
+            'title' => $this->title,
             'description' => $this->description,
-            'rowId'       => $this->rowId,
+            'rowId' => $this->rowId,
         ];
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Services/WebSocketClientTest.php
 
 namespace Happones\LaravelEvolutionClient\Tests\Unit\Services;
@@ -12,14 +13,15 @@ class WebSocketClientTest extends TestCase
     public function it_can_be_instantiated()
     {
         // Create a simple class extending WebSocketClient for testing
-        $webSocketClient = new class('ws://localhost:8080', 'instance-id', 'api-token') extends WebSocketClient {
+        $webSocketClient = new class('ws://localhost:8080', 'instance-id', 'api-token') extends WebSocketClient
+        {
             // Override constructor to avoid React EventLoop initialization
             public function __construct($baseUrl, $instanceId, $apiToken)
             {
-                $this->baseUrl    = $baseUrl;
+                $this->baseUrl = $baseUrl;
                 $this->instanceId = $instanceId;
-                $this->apiToken   = $apiToken;
-                $this->handlers   = [];
+                $this->apiToken = $apiToken;
+                $this->handlers = [];
             }
         };
 
@@ -32,18 +34,22 @@ class WebSocketClientTest extends TestCase
     public function it_can_register_event_handlers()
     {
         // Create a simple class extending WebSocketClient for testing
-        $webSocketClient = new class('ws://localhost:8080', 'instance-id', 'api-token') extends WebSocketClient {
+        $webSocketClient = new class('ws://localhost:8080', 'instance-id', 'api-token') extends WebSocketClient
+        {
             // For testing, make properties and handlers public
             public $baseUrl;
+
             public $instanceId;
+
             public $apiToken;
+
             public $handlers = [];
 
             public function __construct($baseUrl, $instanceId, $apiToken)
             {
-                $this->baseUrl    = $baseUrl;
+                $this->baseUrl = $baseUrl;
                 $this->instanceId = $instanceId;
-                $this->apiToken   = $apiToken;
+                $this->apiToken = $apiToken;
             }
         };
 
@@ -62,18 +68,22 @@ class WebSocketClientTest extends TestCase
     public function it_can_register_multiple_event_handlers()
     {
         // Create a simple class extending WebSocketClient for testing
-        $webSocketClient = new class('ws://localhost:8080', 'instance-id', 'api-token') extends WebSocketClient {
+        $webSocketClient = new class('ws://localhost:8080', 'instance-id', 'api-token') extends WebSocketClient
+        {
             // For testing, make properties and handlers public
             public $baseUrl;
+
             public $instanceId;
+
             public $apiToken;
+
             public $handlers = [];
 
             public function __construct($baseUrl, $instanceId, $apiToken)
             {
-                $this->baseUrl    = $baseUrl;
+                $this->baseUrl = $baseUrl;
                 $this->instanceId = $instanceId;
-                $this->apiToken   = $apiToken;
+                $this->apiToken = $apiToken;
             }
         };
 

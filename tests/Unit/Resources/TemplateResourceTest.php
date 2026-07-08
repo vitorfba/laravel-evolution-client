@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Resources/TemplateResourceTest.php
 
 namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
@@ -28,8 +29,8 @@ class TemplateResourceTest extends TestCase
             'en_US',
             [
                 [
-                    'type'    => 'BODY',
-                    'text'    => 'Hello {{1}}, welcome to our service!',
+                    'type' => 'BODY',
+                    'text' => 'Hello {{1}}, welcome to our service!',
                     'example' => [
                         'body_text' => [
                             ['John Doe'],
@@ -37,7 +38,7 @@ class TemplateResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'type'    => 'BUTTONS',
+                    'type' => 'BUTTONS',
                     'buttons' => [
                         [
                             'type' => 'QUICK_REPLY',
@@ -97,21 +98,21 @@ class TemplateResourceTest extends TestCase
             ->getMock();
 
         $this->service->method('post')->willReturn([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'Template created successfully',
         ]);
 
         $this->service->method('delete')->willReturn([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'Template deleted successfully',
         ]);
 
         $this->service->method('get')->willReturn([
-            'status'    => 'success',
+            'status' => 'success',
             'templates' => [
                 [
-                    'name'     => 'my_template',
-                    'status'   => 'APPROVED',
+                    'name' => 'my_template',
+                    'status' => 'APPROVED',
                     'category' => 'MARKETING',
                     'language' => 'en_US',
                 ],

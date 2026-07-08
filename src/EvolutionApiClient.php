@@ -1,4 +1,5 @@
 <?php
+
 // src/EvolutionApiClient.php
 
 namespace Happones\LaravelEvolutionClient;
@@ -26,62 +27,77 @@ class EvolutionApiClient
      * @var Chat The Chat resource
      */
     public Chat $chat;
+
     /**
      * @var Group The Group resource
      */
     public Group $group;
+
     /**
      * @var Message The Message resource
      */
     public Message $message;
+
     /**
      * @var Instance The Instance resource
      */
     public Instance $instance;
+
     /**
      * @var Call The Call resource
      */
     public Call $call;
+
     /**
      * @var Label The Label resource
      */
     public Label $label;
+
     /**
      * @var Profile The Profile resource
      */
     public Profile $profile;
+
     /**
      * @var WebSocket The WebSocket resource
      */
     public WebSocket $websocket;
+
     /**
      * @var string The instance name
      */
     protected string $instanceName;
+
     /**
      * @var EvolutionService The Evolution API service
      */
     protected EvolutionService $service;
+
     /**
      * @var Template The Template resource
      */
     public Template $template;
+
     /**
      * @var Proxy The Proxy resource
      */
     public Proxy $proxy;
+
     /**
      * @var Settings The Settings resource
      */
     public Settings $settings;
+
     /**
      * @var OpenAIBot The OpenAIBot resource
      */
     public OpenAIBot $openAIBot;
+
     /**
      * @var EvolutionBot The EvolutionBot resource
      */
     public EvolutionBot $evolutionBot;
+
     /**
      * @var Business The Business resource
      */
@@ -89,38 +105,31 @@ class EvolutionApiClient
 
     /**
      * Create a new EvolutionApiClient instance.
-     *
-     * @param EvolutionService $service
-     * @param string           $instanceName
      */
     public function __construct(EvolutionService $service, string $instanceName = 'default')
     {
-        $this->service      = $service;
+        $this->service = $service;
         $this->instanceName = $instanceName;
 
         // Initialize resources
-        $this->chat          = new Chat($service, $instanceName);
-        $this->group         = new Group($service, $instanceName);
-        $this->message       = new Message($service, $instanceName);
-        $this->instance      = new Instance($service, $instanceName);
-        $this->call          = new Call($service, $instanceName);
-        $this->label         = new Label($service, $instanceName);
-        $this->profile       = new Profile($service, $instanceName);
-        $this->websocket     = new WebSocket($service, $instanceName);
-        $this->template      = new Template($service, $instanceName);
-        $this->proxy         = new Proxy($service, $instanceName);
-        $this->settings      = new Settings($service, $instanceName);
-        $this->openAIBot     = new OpenAIBot($service, $instanceName);
-        $this->evolutionBot  = new EvolutionBot($service, $instanceName);
-        $this->business      = new Business($service, $instanceName);
+        $this->chat = new Chat($service, $instanceName);
+        $this->group = new Group($service, $instanceName);
+        $this->message = new Message($service, $instanceName);
+        $this->instance = new Instance($service, $instanceName);
+        $this->call = new Call($service, $instanceName);
+        $this->label = new Label($service, $instanceName);
+        $this->profile = new Profile($service, $instanceName);
+        $this->websocket = new WebSocket($service, $instanceName);
+        $this->template = new Template($service, $instanceName);
+        $this->proxy = new Proxy($service, $instanceName);
+        $this->settings = new Settings($service, $instanceName);
+        $this->openAIBot = new OpenAIBot($service, $instanceName);
+        $this->evolutionBot = new EvolutionBot($service, $instanceName);
+        $this->business = new Business($service, $instanceName);
     }
 
     /**
      * Set the instance name.
-     *
-     * @param string $instanceName
-     *
-     * @return self
      */
     public function instance(string $instanceName): self
     {
@@ -148,11 +157,8 @@ class EvolutionApiClient
     /**
      * Get the QR code for the instance.
      *
-     * @param string $name
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function createInstance(string $name): array
     {
@@ -165,9 +171,6 @@ class EvolutionApiClient
      * Get the QR code for the instance.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
-     *
      */
     public function getQrCode(): array
     {
@@ -178,9 +181,6 @@ class EvolutionApiClient
      * Check if the instance is connected.
      *
      * @throws EvolutionApiException
-     *
-     * @return bool
-     *
      */
     public function isConnected(): bool
     {
@@ -191,9 +191,6 @@ class EvolutionApiClient
      * Disconnect the instance.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
-     *
      */
     public function disconnect(): array
     {
@@ -203,13 +200,8 @@ class EvolutionApiClient
     /**
      * Send a text message.
      *
-     * @param string $phoneNumber
-     * @param string $message
      *
      * @throws EvolutionApiException
-     *
-     * @return array
-     *
      */
     public function sendText(string $phoneNumber, string $message): array
     {

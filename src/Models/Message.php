@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/Message.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -12,8 +13,6 @@ class Message
 
     /**
      * Create a new Message instance.
-     *
-     * @param array $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -22,8 +21,6 @@ class Message
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {

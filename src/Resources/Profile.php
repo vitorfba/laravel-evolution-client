@@ -1,4 +1,5 @@
 <?php
+
 // src/Resources/Profile.php
 
 namespace Happones\LaravelEvolutionClient\Resources;
@@ -25,20 +26,15 @@ class Profile
 
     /**
      * Create a new Profile resource instance.
-     *
-     * @param EvolutionService $service
-     * @param string           $instanceName
      */
     public function __construct(EvolutionService $service, string $instanceName)
     {
-        $this->service      = $service;
+        $this->service = $service;
         $this->instanceName = $instanceName;
     }
 
     /**
      * Get the instance name.
-     *
-     * @return string
      */
     public function getInstanceName(): string
     {
@@ -47,10 +43,6 @@ class Profile
 
     /**
      * Set the instance name.
-     *
-     * @param string $instanceName
-     *
-     * @return void
      */
     public function setInstanceName(string $instanceName): void
     {
@@ -60,11 +52,8 @@ class Profile
     /**
      * Fetch business profile.
      *
-     * @param string $number
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function fetchBusinessProfile(string $number): array
     {
@@ -76,11 +65,8 @@ class Profile
     /**
      * Fetch profile.
      *
-     * @param string $number
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function fetchProfile(string $number): array
     {
@@ -92,11 +78,8 @@ class Profile
     /**
      * Update profile name.
      *
-     * @param string $name
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function updateProfileName(string $name): array
     {
@@ -108,11 +91,8 @@ class Profile
     /**
      * Update profile status.
      *
-     * @param string $status
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function updateProfileStatus(string $status): array
     {
@@ -124,11 +104,8 @@ class Profile
     /**
      * Update profile picture.
      *
-     * @param string $picture
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function updateProfilePicture(string $picture): array
     {
@@ -141,8 +118,6 @@ class Profile
      * Remove profile picture.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function removeProfilePicture(): array
     {
@@ -153,8 +128,6 @@ class Profile
      * Fetch privacy settings.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function fetchPrivacySettings(): array
     {
@@ -164,16 +137,8 @@ class Profile
     /**
      * Update privacy settings.
      *
-     * @param string $readreceipts
-     * @param string $profile
-     * @param string $status
-     * @param string $online
-     * @param string $last
-     * @param string $groupadd
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function updatePrivacySettings(
         string $readreceipts,

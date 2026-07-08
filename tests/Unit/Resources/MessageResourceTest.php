@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Resources/MessageResourceTest.php
 
 namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
@@ -60,7 +61,8 @@ class MessageResourceTest extends TestCase
     public function it_formats_phone_number_correctly()
     {
         // Create a subclass that makes the protected method public for testing
-        $messageResource = new class($this->service, 'test-instance') extends Message {
+        $messageResource = new class($this->service, 'test-instance') extends Message
+        {
             public function publicFormatPhoneNumber(string $phoneNumber): string
             {
                 return $this->formatPhoneNumber($phoneNumber);
@@ -83,6 +85,22 @@ class MessageResourceTest extends TestCase
             -46.6333,
             'São Paulo',
             'Paulista Avenue, 1000'
+        );
+
+        $this->assertIsArray($result);
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_send_media_message()
+    {
+        $result = $this->messageResource->sendMedia(
+            '5511999999999',
+            'image',
+            'image/png',
+            'My caption',
+            'https://example.com/image.png',
+            'image.png'
         );
 
         $this->assertIsArray($result);
@@ -194,7 +212,7 @@ class MessageResourceTest extends TestCase
             'en_US',
             [
                 [
-                    'type'       => 'body',
+                    'type' => 'body',
                     'parameters' => [
                         [
                             'type' => 'text',
@@ -216,16 +234,16 @@ class MessageResourceTest extends TestCase
         $this->mockHandler = new MockHandler([
             new Response(200, [], json_encode([
                 'status' => 'success',
-                'key'    => [
-                    'id'        => '123456',
+                'key' => [
+                    'id' => '123456',
                     'remoteJid' => '5511999999999@c.us',
-                    'fromMe'    => true,
+                    'fromMe' => true,
                 ],
             ])),
         ]);
 
         $handlerStack = HandlerStack::create($this->mockHandler);
-        $client       = new Client(['handler' => $handlerStack]);
+        $client = new Client(['handler' => $handlerStack]);
 
         $this->service = $this->getMockBuilder(EvolutionService::class)
             ->disableOriginalConstructor()
@@ -233,10 +251,10 @@ class MessageResourceTest extends TestCase
 
         $this->service->method('post')->willReturn([
             'status' => 'success',
-            'key'    => [
-                'id'        => '123456',
+            'key' => [
+                'id' => '123456',
                 'remoteJid' => '5511999999999@c.us',
-                'fromMe'    => true,
+                'fromMe' => true,
             ],
         ]);
 

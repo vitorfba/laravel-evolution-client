@@ -1,4 +1,5 @@
 <?php
+
 // src/Resources/Settings.php
 
 namespace Happones\LaravelEvolutionClient\Resources;
@@ -21,20 +22,15 @@ class Settings
 
     /**
      * Create a new Settings resource instance.
-     *
-     * @param EvolutionService $service
-     * @param string           $instanceName
      */
     public function __construct(EvolutionService $service, string $instanceName)
     {
-        $this->service      = $service;
+        $this->service = $service;
         $this->instanceName = $instanceName;
     }
 
     /**
      * Get the instance name.
-     *
-     * @return string
      */
     public function getInstanceName(): string
     {
@@ -43,10 +39,6 @@ class Settings
 
     /**
      * Set the instance name.
-     *
-     * @param string $instanceName
-     *
-     * @return void
      */
     public function setInstanceName(string $instanceName): void
     {
@@ -56,17 +48,8 @@ class Settings
     /**
      * Set instance settings.
      *
-     * @param bool        $rejectCall
-     * @param string|null $msgCall
-     * @param bool        $groupsIgnore
-     * @param bool        $alwaysOnline
-     * @param bool        $readMessages
-     * @param bool        $syncFullHistory
-     * @param bool        $readStatus
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function set(
         bool $rejectCall = false,
@@ -94,8 +77,6 @@ class Settings
      * Find instance settings.
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function find(): array
     {

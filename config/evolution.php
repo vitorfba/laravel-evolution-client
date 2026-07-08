@@ -1,4 +1,5 @@
 <?php
+
 // config/evolution.php
 
 return [
@@ -68,5 +69,38 @@ return [
         'message.ack',
         'status.instance',
         // Add more events as needed
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Inbound Webhook Handling
+    |--------------------------------------------------------------------------
+    |
+    | Configuration for receiving webhook callbacks from Evolution API. When the
+    | route is enabled, the package registers a POST endpoint that parses the
+    | payload into a WebhookEvent and dispatches Laravel events you can listen to
+    | (see Happones\LaravelEvolutionClient\Events\EvolutionWebhookReceived).
+    |
+    */
+    'webhook' => [
+        'route' => [
+            'enabled' => env('EVOLUTION_WEBHOOK_ROUTE_ENABLED', false),
+            'path' => env('EVOLUTION_WEBHOOK_ROUTE_PATH', 'evolution/webhook'),
+            'name' => 'evolution.webhook',
+            'middleware' => ['api'],
+        ],
+
+        /*
+        | When queue.enabled is true, the built-in webhook controller pushes a
+        | ProcessEvolutionWebhook job instead of parsing/dispatching inline, so
+        | the HTTP response returns immediately and Evolution stops retrying.
+        | Leave it false to process synchronously within the request. Either way,
+        | your own event listeners may still implement ShouldQueue independently.
+        */
+        'queue' => [
+            'enabled' => env('EVOLUTION_WEBHOOK_QUEUE_ENABLED', false),
+            'connection' => env('EVOLUTION_WEBHOOK_QUEUE_CONNECTION', null),
+            'queue' => env('EVOLUTION_WEBHOOK_QUEUE_NAME', null),
+        ],
     ],
 ];

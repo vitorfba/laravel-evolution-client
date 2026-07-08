@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/Label.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -25,9 +26,9 @@ class Label
     /**
      * Create a new Label instance.
      *
-     * @param string $number  The phone number
+     * @param string $number The phone number
      * @param string $labelId The label ID
-     * @param string $action  The action (add or remove)
+     * @param string $action The action (add or remove)
      *
      * @throws InvalidArgumentException
      */
@@ -37,22 +38,20 @@ class Label
             throw new InvalidArgumentException("Action must be 'add' or 'remove'");
         }
 
-        $this->number  = $number;
+        $this->number = $number;
         $this->labelId = $labelId;
-        $this->action  = $action;
+        $this->action = $action;
     }
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {
         return [
-            'number'  => $this->number,
+            'number' => $this->number,
             'labelId' => $this->labelId,
-            'action'  => $this->action,
+            'action' => $this->action,
         ];
     }
 }

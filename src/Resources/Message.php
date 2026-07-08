@@ -1,4 +1,5 @@
 <?php
+
 // src/Resources/Message.php
 
 namespace Happones\LaravelEvolutionClient\Resources;
@@ -30,20 +31,15 @@ class Message
 
     /**
      * Create a new Message resource instance.
-     *
-     * @param EvolutionService $service
-     * @param string           $instanceName
      */
     public function __construct(EvolutionService $service, string $instanceName)
     {
-        $this->service      = $service;
+        $this->service = $service;
         $this->instanceName = $instanceName;
     }
 
     /**
      * Get the instance name.
-     *
-     * @return string
      */
     public function getInstanceName(): string
     {
@@ -52,10 +48,6 @@ class Message
 
     /**
      * Set the instance name.
-     *
-     * @param string $instanceName
-     *
-     * @return void
      */
     public function setInstanceName(string $instanceName): void
     {
@@ -67,18 +59,9 @@ class Message
     /**
      * Send a text message.
      *
-     * @param string     $phoneNumber
-     * @param string     $message
-     * @param bool       $isGroup
-     * @param int|null   $delay
-     * @param bool|null  $linkPreview
-     * @param bool|null  $mentionsEveryOne
-     * @param array|null $mentioned
      *
      * @throws EvolutionApiException
      * @throws InvalidArgumentException
-     *
-     * @return array
      */
     public function sendText(
         string $phoneNumber,
@@ -116,10 +99,6 @@ class Message
 
     /**
      * Format phone number to be used with the API.
-     *
-     * @param string $phoneNumber
-     *
-     * @return string
      */
     protected function formatPhoneNumber(string $phoneNumber): string
     {
@@ -133,14 +112,8 @@ class Message
     /**
      * Send an image message.
      *
-     * @param string $phoneNumber
-     * @param string $image
-     * @param string $caption
-     * @param bool   $isGroup
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function sendImage(string $phoneNumber, string $image, string $caption = '', bool $isGroup = false): array
     {
@@ -149,13 +122,13 @@ class Message
             : $this->formatPhoneNumber($phoneNumber);
 
         return $this->service->post("/message/chat/send/image/{$this->instanceName}", [
-            'number'  => $recipient,
+            'number' => $recipient,
             'options' => [
-                'delay'    => 1200,
+                'delay' => 1200,
                 'presence' => 'composing',
             ],
             'imageMessage' => [
-                'image'   => $image,
+                'image' => $image,
                 'caption' => $caption,
             ],
         ]);
@@ -164,15 +137,8 @@ class Message
     /**
      * Send a document message.
      *
-     * @param string $phoneNumber
-     * @param string $document
-     * @param string $fileName
-     * @param string $caption
-     * @param bool   $isGroup
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function sendDocument(string $phoneNumber, string $document, string $fileName, string $caption = '', bool $isGroup = false): array
     {
@@ -181,15 +147,15 @@ class Message
             : $this->formatPhoneNumber($phoneNumber);
 
         return $this->service->post("/message/chat/send/document/{$this->instanceName}", [
-            'number'  => $recipient,
+            'number' => $recipient,
             'options' => [
-                'delay'    => 1200,
+                'delay' => 1200,
                 'presence' => 'composing',
             ],
             'documentMessage' => [
                 'document' => $document,
                 'fileName' => $fileName,
-                'caption'  => $caption,
+                'caption' => $caption,
             ],
         ]);
     }
@@ -197,49 +163,79 @@ class Message
     /**
      * Send a location message.
      *
-     * @param string $phoneNumber
-     * @param float  $latitude
-     * @param float  $longitude
-     * @param string $name
-     * @param string $address
-     * @param bool   $isGroup
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
-    public function sendLocation(string $phoneNumber, float $latitude, float $longitude, string $name = '', string $address = '', bool $isGroup = false): array
+    public function sendLocation(string $phoneNumber, float $latitude, float $longitude, string $name = '', string $address = '', bool $isGroup = false, int $delay = 0): array
     {
         $recipient = $isGroup
             ? $phoneNumber . '@g.us'
             : $this->formatPhoneNumber($phoneNumber);
 
-        return $this->service->post("/message/chat/send/location/{$this->instanceName}", [
-            'number'  => $recipient,
-            'options' => [
-                'delay'    => 1200,
-                'presence' => 'composing',
-            ],
-            'locationMessage' => [
-                'lat'     => $latitude,
-                'lng'     => $longitude,
-                'name'    => $name,
-                'address' => $address,
-            ],
-        ]);
+        $payload = [
+            'number' => $recipient,
+            'name' => $name,
+            'address' => $address,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+        ];
+
+        if ($delay > 0) {
+            $payload['delay'] = $delay;
+        }
+
+        return $this->service->post("/message/sendLocation/{$this->instanceName}", $payload);
+    }
+
+    /**
+     * Send a media message (image, video or document).
+     *
+     * @param string $phoneNumber Recipient phone number or group id
+     * @param string $mediatype Media type: image, video or document
+     * @param string $mimetype MIME type, e.g. image/png
+     * @param string $caption Media caption
+     * @param string $media URL or base64 media content
+     * @param string $fileName File name, e.g. image.png
+     * @param int $delay Presence time in milliseconds before sending
+     * @param bool $isGroup Whether the recipient is a group
+     *
+     * @throws EvolutionApiException
+     */
+    public function sendMedia(
+        string $phoneNumber,
+        string $mediatype,
+        string $mimetype,
+        string $caption,
+        string $media,
+        string $fileName,
+        int $delay = 0,
+        bool $isGroup = false
+    ): array {
+        $recipient = $isGroup
+            ? $phoneNumber . '@g.us'
+            : $this->formatPhoneNumber($phoneNumber);
+
+        $payload = [
+            'number' => $recipient,
+            'mediatype' => $mediatype,
+            'mimetype' => $mimetype,
+            'caption' => $caption,
+            'media' => $media,
+            'fileName' => $fileName,
+        ];
+
+        if ($delay > 0) {
+            $payload['delay'] = $delay;
+        }
+
+        return $this->service->post("/message/sendMedia/{$this->instanceName}", $payload);
     }
 
     /**
      * Send a contact message.
      *
-     * @param string $phoneNumber
-     * @param string $contactName
-     * @param string $contactNumber
-     * @param bool   $isGroup
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function sendContact(string $phoneNumber, string $contactName, string $contactNumber, bool $isGroup = false): array
     {
@@ -264,16 +260,8 @@ class Message
     /**
      * Send a poll message.
      *
-     * @param string   $phoneNumber
-     * @param string   $name
-     * @param int      $selectableCount
-     * @param array    $values
-     * @param int|null $delay
-     * @param bool     $isGroup
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function sendPoll(
         string $phoneNumber,
@@ -301,18 +289,8 @@ class Message
     /**
      * Send a list message.
      *
-     * @param string   $phoneNumber
-     * @param string   $title
-     * @param string   $description
-     * @param string   $buttonText
-     * @param string   $footerText
-     * @param array    $sections
-     * @param int|null $delay
-     * @param bool     $isGroup
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function sendList(
         string $phoneNumber,
@@ -344,17 +322,8 @@ class Message
     /**
      * Send a button message.
      *
-     * @param string   $phoneNumber
-     * @param string   $title
-     * @param string   $description
-     * @param string   $footer
-     * @param array    $buttons
-     * @param int|null $delay
-     * @param bool     $isGroup
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function sendButtons(
         string $phoneNumber,
@@ -384,12 +353,8 @@ class Message
     /**
      * Send a reaction to a message.
      *
-     * @param array  $key
-     * @param string $reaction
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function sendReaction(array $key, string $reaction): array
     {
@@ -404,17 +369,8 @@ class Message
     /**
      * Send a status message.
      *
-     * @param string      $type
-     * @param string      $content
-     * @param string|null $caption
-     * @param string|null $backgroundColor
-     * @param int|null    $font
-     * @param bool        $allContacts
-     * @param array|null  $statusJidList
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function sendStatus(
         string $type,
@@ -441,14 +397,9 @@ class Message
     /**
      * Send an audio message.
      *
-     * @param string $phoneNumber
-     * @param string $audio       URL or base64
-     * @param bool   $isGroup
-     * @param int    $delay
+     * @param string $audio URL or base64
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function sendAudio(string $phoneNumber, string $audio, bool $isGroup = false, int $delay = 1200): array
     {
@@ -458,22 +409,17 @@ class Message
 
         return $this->service->post("/message/sendWhatsAppAudio/{$this->instanceName}", [
             'number' => $recipient,
-            'audio'  => $audio,
-            'delay'  => $delay,
+            'audio' => $audio,
+            'delay' => $delay,
         ]);
     }
 
     /**
      * Send a sticker message.
      *
-     * @param string $phoneNumber
-     * @param string $sticker     URL or base64
-     * @param bool   $isGroup
-     * @param int    $delay
+     * @param string $sticker URL or base64
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function sendSticker(string $phoneNumber, string $sticker, bool $isGroup = false, int $delay = 1200): array
     {
@@ -482,25 +428,17 @@ class Message
             : $this->formatPhoneNumber($phoneNumber);
 
         return $this->service->post("/message/sendSticker/{$this->instanceName}", [
-            'number'  => $recipient,
+            'number' => $recipient,
             'sticker' => $sticker,
-            'delay'   => $delay,
+            'delay' => $delay,
         ]);
     }
 
     /**
      * Send a template message.
      *
-     * @param string      $phoneNumber
-     * @param string      $name
-     * @param string      $language
-     * @param array       $components
-     * @param string|null $webhookUrl
-     * @param bool        $isGroup
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function sendTemplate(
         string $phoneNumber,

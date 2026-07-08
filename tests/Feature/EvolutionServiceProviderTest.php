@@ -1,4 +1,5 @@
 <?php
+
 // tests/Feature/EvolutionServiceProviderTest.php
 
 namespace Happones\LaravelEvolutionClient\Tests\Feature;
@@ -56,7 +57,7 @@ class EvolutionServiceProviderTest extends TestCase
     {
         $this->artisan('vendor:publish', [
             '--provider' => 'Happones\LaravelEvolutionClient\EvolutionServiceProvider',
-            '--tag'      => 'evolution-config',
+            '--tag' => 'evolution-config',
         ]);
 
         $this->assertFileExists(config_path('evolution.php'));

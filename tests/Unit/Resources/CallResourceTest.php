@@ -1,4 +1,5 @@
 <?php
+
 // tests/Unit/Resources/CallResourceTest.php
 
 namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
@@ -46,7 +47,7 @@ class CallResourceTest extends TestCase
             ->getMock();
 
         $this->service->method('post')->willReturn([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'Fake call sent',
         ]);
 

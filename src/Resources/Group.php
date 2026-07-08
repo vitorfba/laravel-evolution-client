@@ -1,10 +1,12 @@
 <?php
+
 // src/Resources/Group.php
 
 namespace Happones\LaravelEvolutionClient\Resources;
 
 use Happones\LaravelEvolutionClient\Exceptions\EvolutionApiException;
 use Happones\LaravelEvolutionClient\Services\EvolutionService;
+use InvalidArgumentException;
 
 class Group
 {
@@ -20,20 +22,15 @@ class Group
 
     /**
      * Create a new Group resource instance.
-     *
-     * @param EvolutionService $service
-     * @param string           $instanceName
      */
     public function __construct(EvolutionService $service, string $instanceName)
     {
-        $this->service      = $service;
+        $this->service = $service;
         $this->instanceName = $instanceName;
     }
 
     /**
      * Get the instance name.
-     *
-     * @return string
      */
     public function getInstanceName(): string
     {
@@ -42,10 +39,6 @@ class Group
 
     /**
      * Set the instance name.
-     *
-     * @param string $instanceName
-     *
-     * @return void
      */
     public function setInstanceName(string $instanceName): void
     {
@@ -55,42 +48,41 @@ class Group
     /**
      * Get all groups.
      *
-     * @throws EvolutionApiException
+     * @param bool $getParticipants Whether to include participants in the response
      *
-     * @return array
+     * @throws EvolutionApiException
      */
-    public function all(): array
+    public function all(bool $getParticipants = false): array
     {
-        return $this->service->get("/group/fetch/{$this->instanceName}");
+        return $this->service->get("/group/fetchAllGroups/{$this->instanceName}", [
+            'getParticipants' => $getParticipants ? 'true' : 'false',
+        ]);
     }
 
     /**
      * Get group info.
      *
-     * @param string $groupId
+     * @param string $groupJid Group remote JID
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
-    public function find(string $groupId): array
+    public function find(string $groupJid): array
     {
-        return $this->service->get("/group/find/{$this->instanceName}", [
-            'groupId' => $groupId,
+        return $this->service->get("/group/findGroupInfos/{$this->instanceName}", [
+            'groupJid' => $groupJid,
         ]);
     }
 
     /**
      * Create a new group.
      *
-     * @param string $name
-     * @param array  $participants
+     * @param string $subject Group subject
+     * @param array<int, string> $participants Group members phone numbers with country code
+     * @param string $description Group description
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
-    public function create(string $name, array $participants): array
+    public function create(string $subject, array $participants, string $description = ''): array
     {
         // Format participant numbers
         $formattedParticipants = array_map(function ($number) {
@@ -98,17 +90,14 @@ class Group
         }, $participants);
 
         return $this->service->post("/group/create/{$this->instanceName}", [
-            'name'         => $name,
+            'subject' => $subject,
+            'description' => $description,
             'participants' => $formattedParticipants,
         ]);
     }
 
     /**
      * Format phone number to be used with the API.
-     *
-     * @param string $phoneNumber
-     *
-     * @return string
      */
     protected function formatPhoneNumber(string $phoneNumber): string
     {
@@ -119,17 +108,14 @@ class Group
     /**
      * Update group subject.
      *
-     * @param string $groupId
-     * @param string $subject
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
-    public function updateSubject(string $groupId, string $subject): array
+    public function updateSubject(string $groupJid, string $subject): array
     {
-        return $this->service->put("/group/update-subject/{$this->instanceName}", [
-            'groupId' => $groupId,
+        $query = http_build_query(['groupJid' => $groupJid]);
+
+        return $this->service->post("/group/updateGroupSubject/{$this->instanceName}?{$query}", [
             'subject' => $subject,
         ]);
     }
@@ -137,17 +123,16 @@ class Group
     /**
      * Update group description.
      *
-     * @param string $groupId
-     * @param string $description
+     * @param string $groupJid Group remote JID
+     * @param string $description New group description
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
-    public function updateDescription(string $groupId, string $description): array
+    public function updateDescription(string $groupJid, string $description): array
     {
-        return $this->service->put("/group/update-description/{$this->instanceName}", [
-            'groupId'     => $groupId,
+        $query = http_build_query(['groupJid' => $groupJid]);
+
+        return $this->service->post("/group/updateGroupDescription/{$this->instanceName}?{$query}", [
             'description' => $description,
         ]);
     }
@@ -155,133 +140,93 @@ class Group
     /**
      * Add participants to a group.
      *
-     * @param string $groupId
-     * @param array  $participants
+     * @param string $groupJid Group remote JID
+     * @param array<int, string> $participants Phone numbers/JIDs to add
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
-    public function addParticipants(string $groupId, array $participants): array
+    public function addParticipants(string $groupJid, array $participants): array
     {
-        // Format participant numbers
-        $formattedParticipants = array_map(function ($number) {
-            return $this->formatPhoneNumber($number);
-        }, $participants);
-
-        return $this->service->post("/group/add-participants/{$this->instanceName}", [
-            'groupId'      => $groupId,
-            'participants' => $formattedParticipants,
-        ]);
+        return $this->updateParticipant($groupJid, 'add', $participants);
     }
 
     /**
      * Remove participants from a group.
      *
-     * @param string $groupId
-     * @param array  $participants
+     * @param string $groupJid Group remote JID
+     * @param array<int, string> $participants Phone numbers/JIDs to remove
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
-    public function removeParticipants(string $groupId, array $participants): array
+    public function removeParticipants(string $groupJid, array $participants): array
     {
-        // Format participant numbers
-        $formattedParticipants = array_map(function ($number) {
-            return $this->formatPhoneNumber($number);
-        }, $participants);
-
-        return $this->service->post("/group/remove-participants/{$this->instanceName}", [
-            'groupId'      => $groupId,
-            'participants' => $formattedParticipants,
-        ]);
+        return $this->updateParticipant($groupJid, 'remove', $participants);
     }
 
     /**
      * Make a participant an admin.
      *
-     * @param string $groupId
-     * @param string $participant
+     * @param string $groupJid Group remote JID
+     * @param string $participant Phone number/JID to promote
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
-    public function promoteToAdmin(string $groupId, string $participant): array
+    public function promoteToAdmin(string $groupJid, string $participant): array
     {
-        $formattedParticipant = $this->formatPhoneNumber($participant);
-
-        return $this->service->post("/group/promote-participants/{$this->instanceName}", [
-            'groupId'      => $groupId,
-            'participants' => [$formattedParticipant],
-        ]);
+        return $this->updateParticipant($groupJid, 'promote', [$participant]);
     }
 
     /**
      * Demote a participant from admin.
      *
-     * @param string $groupId
-     * @param string $participant
+     * @param string $groupJid Group remote JID
+     * @param string $participant Phone number/JID to demote
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
-    public function demoteFromAdmin(string $groupId, string $participant): array
+    public function demoteFromAdmin(string $groupJid, string $participant): array
     {
-        $formattedParticipant = $this->formatPhoneNumber($participant);
-
-        return $this->service->post("/group/demote-participants/{$this->instanceName}", [
-            'groupId'      => $groupId,
-            'participants' => [$formattedParticipant],
-        ]);
+        return $this->updateParticipant($groupJid, 'demote', [$participant]);
     }
 
     /**
      * Leave a group.
      *
-     * @param string $groupId
+     * @param string $groupJid Group remote JID
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
-    public function leave(string $groupId): array
+    public function leave(string $groupJid): array
     {
-        return $this->service->post("/group/leave/{$this->instanceName}", [
-            'groupId' => $groupId,
+        return $this->service->delete("/group/leaveGroup/{$this->instanceName}", [
+            'groupJid' => $groupJid,
         ]);
     }
 
     /**
      * Get group invite code.
      *
-     * @param string $groupId
+     * @param string $groupJid Group remote JID
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
-    public function getInviteCode(string $groupId): array
+    public function getInviteCode(string $groupJid): array
     {
-        return $this->service->get("/group/invite-code/{$this->instanceName}", [
-            'groupId' => $groupId,
+        return $this->service->get("/group/inviteCode/{$this->instanceName}", [
+            'groupJid' => $groupJid,
         ]);
     }
 
     /**
      * Join a group using invite code.
      *
-     * @param string $inviteCode
+     * @param string $inviteCode Group invite code
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function joinWithInviteCode(string $inviteCode): array
     {
-        return $this->service->post("/group/join/{$this->instanceName}", [
+        return $this->service->get("/group/acceptInviteCode/{$this->instanceName}", [
             'inviteCode' => $inviteCode,
         ]);
     }
@@ -289,11 +234,8 @@ class Group
     /**
      * Get group participants.
      *
-     * @param string $groupJid
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function getParticipants(string $groupJid): array
     {
@@ -305,13 +247,10 @@ class Group
     /**
      * Update participant in a group (add, remove, promote, demote).
      *
-     * @param string $groupJid
-     * @param string $action       Enum: 'add', 'remove', 'promote', 'demote'
-     * @param array  $participants Array of phone numbers/JIDs
+     * @param string $action Enum: 'add', 'remove', 'promote', 'demote'
+     * @param array $participants Array of phone numbers/JIDs
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function updateParticipant(string $groupJid, string $action, array $participants): array
     {
@@ -319,10 +258,119 @@ class Group
             return $this->formatPhoneNumber($number);
         }, $participants);
 
-        return $this->service->post("/group/updateParticipant/{$this->instanceName}", [
-            'groupJid'     => $groupJid,
-            'action'       => $action,
+        $query = http_build_query(['groupJid' => $groupJid]);
+
+        return $this->service->post("/group/updateParticipant/{$this->instanceName}?{$query}", [
+            'action' => $action,
             'participants' => $formattedParticipants,
+        ]);
+    }
+
+    /**
+     * Update the group profile picture.
+     *
+     * @param string $groupJid Group remote JID
+     * @param string $image New profile picture image URL
+     *
+     * @throws EvolutionApiException
+     */
+    public function updateGroupPicture(string $groupJid, string $image): array
+    {
+        $query = http_build_query(['groupJid' => $groupJid]);
+
+        return $this->service->post("/group/updateGroupPicture/{$this->instanceName}?{$query}", [
+            'image' => $image,
+        ]);
+    }
+
+    /**
+     * Revoke the current group invite code.
+     *
+     * @param string $groupJid Group remote JID
+     *
+     * @throws EvolutionApiException
+     */
+    public function revokeInviteCode(string $groupJid): array
+    {
+        $query = http_build_query(['groupJid' => $groupJid]);
+
+        return $this->service->post("/group/revokeInviteCode/{$this->instanceName}?{$query}");
+    }
+
+    /**
+     * Get information about a group from its invite code.
+     *
+     * @param string $inviteCode Group invite code
+     *
+     * @throws EvolutionApiException
+     */
+    public function inviteInfo(string $inviteCode): array
+    {
+        return $this->service->get("/group/inviteInfo/{$this->instanceName}", [
+            'inviteCode' => $inviteCode,
+        ]);
+    }
+
+    /**
+     * Send a group invitation to a list of numbers.
+     *
+     * @param string $groupJid Group remote JID
+     * @param string $description Description to send with the invitation
+     * @param array<int, string> $numbers Numbers to receive the invitation
+     *
+     * @throws EvolutionApiException
+     */
+    public function sendInvite(string $groupJid, string $description, array $numbers): array
+    {
+        $formattedNumbers = array_map(function ($number) {
+            return $this->formatPhoneNumber($number);
+        }, $numbers);
+
+        return $this->service->post("/group/sendInvite/{$this->instanceName}", [
+            'groupJid' => $groupJid,
+            'description' => $description,
+            'numbers' => $formattedNumbers,
+        ]);
+    }
+
+    /**
+     * Toggle ephemeral (disappearing) messages for a group.
+     *
+     * @param string $groupJid Group remote JID
+     * @param int $expiration Time to expire messages, in seconds
+     *
+     * @throws EvolutionApiException
+     */
+    public function toggleEphemeral(string $groupJid, int $expiration): array
+    {
+        $query = http_build_query(['groupJid' => $groupJid]);
+
+        return $this->service->post("/group/toggleEphemeral/{$this->instanceName}?{$query}", [
+            'expiration' => $expiration,
+        ]);
+    }
+
+    /**
+     * Update a group setting.
+     *
+     * @param string $groupJid Group remote JID
+     * @param string $action Setting: announcement|not_announcement|locked|unlocked
+     *
+     * @throws EvolutionApiException
+     * @throws InvalidArgumentException
+     */
+    public function updateSetting(string $groupJid, string $action): array
+    {
+        $allowed = ['announcement', 'not_announcement', 'locked', 'unlocked'];
+
+        if (! in_array($action, $allowed, true)) {
+            throw new InvalidArgumentException('Action must be one of: ' . implode(', ', $allowed));
+        }
+
+        $query = http_build_query(['groupJid' => $groupJid]);
+
+        return $this->service->post("/group/updateSetting/{$this->instanceName}?{$query}", [
+            'action' => $action,
         ]);
     }
 }

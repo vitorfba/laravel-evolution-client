@@ -1,4 +1,5 @@
 <?php
+
 // src/Resources/Call.php
 
 namespace Happones\LaravelEvolutionClient\Resources;
@@ -21,20 +22,15 @@ class Call
 
     /**
      * Create a new Call resource instance.
-     *
-     * @param EvolutionService $service
-     * @param string           $instanceName
      */
     public function __construct(EvolutionService $service, string $instanceName)
     {
-        $this->service      = $service;
+        $this->service = $service;
         $this->instanceName = $instanceName;
     }
 
     /**
      * Get the instance name.
-     *
-     * @return string
      */
     public function getInstanceName(): string
     {
@@ -43,10 +39,6 @@ class Call
 
     /**
      * Set the instance name.
-     *
-     * @param string $instanceName
-     *
-     * @return void
      */
     public function setInstanceName(string $instanceName): void
     {
@@ -56,13 +48,8 @@ class Call
     /**
      * Make a fake call.
      *
-     * @param string $number
-     * @param bool   $isVideo
-     * @param int    $callDuration
      *
      * @throws EvolutionApiException
-     *
-     * @return array
      */
     public function fakeCall(string $number, bool $isVideo = false, int $callDuration = 45): array
     {

@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/ListSection.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -17,9 +18,6 @@ class ListSection
 
     /**
      * Create a new ListSection instance.
-     *
-     * @param string $title
-     * @param array  $rows
      */
     public function __construct(string $title, array $rows)
     {
@@ -40,14 +38,12 @@ class ListSection
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {
         return [
             'title' => $this->title,
-            'rows'  => $this->rows,
+            'rows' => $this->rows,
         ];
     }
 }

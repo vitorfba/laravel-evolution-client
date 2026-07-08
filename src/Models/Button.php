@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/Button.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -22,27 +23,21 @@ class Button
 
     /**
      * Create a new Button instance.
-     *
-     * @param string $type
-     * @param string $displayText
-     * @param array  $attributes
      */
     public function __construct(string $type, string $displayText, array $attributes = [])
     {
-        $this->type        = $type;
+        $this->type = $type;
         $this->displayText = $displayText;
-        $this->attributes  = $attributes;
+        $this->attributes = $attributes;
     }
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {
         $result = [
-            'type'        => $this->type,
+            'type' => $this->type,
             'displayText' => $this->displayText,
         ];
 

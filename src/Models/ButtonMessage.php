@@ -1,4 +1,5 @@
 <?php
+
 // src/Models/ButtonMessage.php
 
 namespace Happones\LaravelEvolutionClient\Models;
@@ -12,14 +13,6 @@ class ButtonMessage
 
     /**
      * Create a new ButtonMessage instance.
-     *
-     * @param string             $number
-     * @param string             $title
-     * @param string             $description
-     * @param string             $footer
-     * @param array              $buttons
-     * @param int|null           $delay
-     * @param QuotedMessage|null $quoted
      */
     public function __construct(
         string $number,
@@ -41,11 +34,11 @@ class ButtonMessage
         }
 
         $this->attributes = [
-            'number'      => $number,
-            'title'       => $title,
+            'number' => $number,
+            'title' => $title,
             'description' => $description,
-            'footer'      => $footer,
-            'buttons'     => $buttonsArray,
+            'footer' => $footer,
+            'buttons' => $buttonsArray,
         ];
 
         if ($delay !== null) {
@@ -59,8 +52,6 @@ class ButtonMessage
 
     /**
      * Get the instance as an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {
