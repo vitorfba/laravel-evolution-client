@@ -9,7 +9,7 @@ Guidance for [Claude Code](https://docs.claude.com/en/docs/claude-code) working 
 ## TL;DR
 
 `vitorfba/laravel-evolution-client` — a Laravel HTTP client for the Evolution API v2
-(WhatsApp). Framework package, Spatie-style. PHP `^8.3`, Laravel `^13.0`.
+(WhatsApp). Framework package, Spatie-style. PHP `^8.2`, Laravel `^12.0|^13.0`.
 
 ## The three gates (run before every commit / release)
 
@@ -42,4 +42,4 @@ Use `composer format` to auto-fix style. Never hand-format around Pint.
 - Verify every endpoint (verb, path, body) against the Evolution API v2 OpenAPI spec.
 - Never `git push --force` a tag or rewrite a published tag — the package is public on
   Packagist and a duplicate/rewritten tag breaks releases. Cut a new patch instead.
-- Keep everything PHP 8.3+ / Laravel 13 compatible.
+- Keep everything PHP 8.2+ / Laravel 12|13 compatible.

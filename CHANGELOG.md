@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-07-23
+
+### Added
+- Support for **Laravel 12** alongside Laravel 13
+  (`illuminate/contracts` + `illuminate/support` `^12.0|^13.0`).
+
+### Changed
+- Lowered the PHP requirement to `^8.2` so the package installs on Laravel 12 apps
+  that still allow PHP 8.2.
+- CI test matrix now covers Laravel 12 (testbench 10) and Laravel 13 (testbench 11).
+
 ## [1.0.0] - 2026-07-23
 
 ### Added

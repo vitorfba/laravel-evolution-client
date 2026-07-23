@@ -17,8 +17,8 @@ conventions popularised by [Spatie's Laravel packages](https://spatie.be/open-so
 a service provider, a publishable config, a facade, PSR-4 `src/`, and a fully
 mocked test suite.
 
-- **PHP:** `^8.3` (CI runs 8.3, 8.4, 8.5)
-- **Laravel:** `^13.0` (`illuminate/*`), tested via `orchestra/testbench ^11.0`
+- **PHP:** `^8.2` (CI runs 8.2–8.5)
+- **Laravel:** `^12.0|^13.0` (`illuminate/*`), tested via `orchestra/testbench ^10.0|^11.0`
 - **Namespace:** `Vitorfba\LaravelEvolutionClient\` → `src/`
 - **Tests namespace:** `Vitorfba\LaravelEvolutionClient\Tests\` → `tests/`
 
