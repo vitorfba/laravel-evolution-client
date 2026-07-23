@@ -112,52 +112,47 @@ class Message
     /**
      * Send an image message.
      *
+     * Evolution API v2 exposes a single media endpoint (`/message/sendMedia/{instance}`).
+     * The legacy `/message/chat/send/image/{instance}` path returns 404 on current servers.
      *
      * @throws EvolutionApiException
      */
     public function sendImage(string $phoneNumber, string $image, string $caption = '', bool $isGroup = false): array
     {
-        $recipient = $isGroup
-            ? $phoneNumber . '@g.us'
-            : $this->formatPhoneNumber($phoneNumber);
+        $fileName = $this->guessFileName($image, 'image.jpg');
 
-        return $this->service->post("/message/chat/send/image/{$this->instanceName}", [
-            'number' => $recipient,
-            'options' => [
-                'delay' => 1200,
-                'presence' => 'composing',
-            ],
-            'imageMessage' => [
-                'image' => $image,
-                'caption' => $caption,
-            ],
-        ]);
+        return $this->sendMedia(
+            $phoneNumber,
+            'image',
+            $this->guessMimeType($fileName, 'image/jpeg'),
+            $caption,
+            $image,
+            $fileName,
+            0,
+            $isGroup
+        );
     }
 
     /**
      * Send a document message.
      *
+     * Evolution API v2 exposes a single media endpoint (`/message/sendMedia/{instance}`).
+     * The legacy `/message/chat/send/document/{instance}` path returns 404 on current servers.
      *
      * @throws EvolutionApiException
      */
     public function sendDocument(string $phoneNumber, string $document, string $fileName, string $caption = '', bool $isGroup = false): array
     {
-        $recipient = $isGroup
-            ? $phoneNumber . '@g.us'
-            : $this->formatPhoneNumber($phoneNumber);
-
-        return $this->service->post("/message/chat/send/document/{$this->instanceName}", [
-            'number' => $recipient,
-            'options' => [
-                'delay' => 1200,
-                'presence' => 'composing',
-            ],
-            'documentMessage' => [
-                'document' => $document,
-                'fileName' => $fileName,
-                'caption' => $caption,
-            ],
-        ]);
+        return $this->sendMedia(
+            $phoneNumber,
+            'document',
+            $this->guessMimeType($fileName, 'application/octet-stream'),
+            $caption,
+            $document,
+            $fileName,
+            0,
+            $isGroup
+        );
     }
 
     /**
@@ -461,5 +456,45 @@ class Message
         );
 
         return $this->service->post("/message/sendTemplate/{$this->instanceName}", $template->toArray());
+    }
+
+    /**
+     * Infer a MIME type from a file name or media path.
+     */
+    protected function guessMimeType(string $fileName, string $fallback = 'application/octet-stream'): string
+    {
+        $extension = strtolower((string) pathinfo($fileName, PATHINFO_EXTENSION));
+
+        return match ($extension) {
+            'pdf' => 'application/pdf',
+            'png' => 'image/png',
+            'jpg', 'jpeg' => 'image/jpeg',
+            'gif' => 'image/gif',
+            'webp' => 'image/webp',
+            'mp4' => 'video/mp4',
+            'mp3' => 'audio/mpeg',
+            'ogg', 'opus' => 'audio/ogg',
+            'doc' => 'application/msword',
+            'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'xls' => 'application/vnd.ms-excel',
+            'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'txt' => 'text/plain',
+            default => $fallback,
+        };
+    }
+
+    /**
+     * Best-effort file name from a URL/path, with a safe fallback.
+     */
+    protected function guessFileName(string $media, string $fallback): string
+    {
+        $path = parse_url($media, PHP_URL_PATH);
+        $base = is_string($path) ? basename($path) : '';
+
+        if ($base !== '' && $base !== '/' && str_contains($base, '.')) {
+            return $base;
+        }
+
+        return $fallback;
     }
 }

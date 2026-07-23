@@ -108,6 +108,71 @@ class MessageResourceTest extends TestCase
     }
 
     /** @test */
+    public function it_sends_document_through_v2_send_media_endpoint()
+    {
+        $service = $this->getMockBuilder(EvolutionService::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['post'])
+            ->getMock();
+
+        $service->expects($this->once())
+            ->method('post')
+            ->with(
+                '/message/sendMedia/test-instance',
+                $this->callback(function (array $payload): bool {
+                    return ($payload['mediatype'] ?? null) === 'document'
+                        && ($payload['mimetype'] ?? null) === 'application/pdf'
+                        && ($payload['fileName'] ?? null) === 'report.pdf'
+                        && ($payload['media'] ?? null) === 'https://example.com/report.pdf'
+                        && ($payload['caption'] ?? null) === 'Doc caption'
+                        && str_starts_with((string) ($payload['number'] ?? ''), '5511999999999');
+                })
+            )
+            ->willReturn(['status' => 'success']);
+
+        $resource = new Message($service, 'test-instance');
+        $result = $resource->sendDocument(
+            '5511999999999',
+            'https://example.com/report.pdf',
+            'report.pdf',
+            'Doc caption'
+        );
+
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_sends_image_through_v2_send_media_endpoint()
+    {
+        $service = $this->getMockBuilder(EvolutionService::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['post'])
+            ->getMock();
+
+        $service->expects($this->once())
+            ->method('post')
+            ->with(
+                '/message/sendMedia/test-instance',
+                $this->callback(function (array $payload): bool {
+                    return ($payload['mediatype'] ?? null) === 'image'
+                        && ($payload['mimetype'] ?? null) === 'image/png'
+                        && ($payload['media'] ?? null) === 'https://example.com/photo.png'
+                        && ($payload['fileName'] ?? null) === 'photo.png';
+                })
+            )
+            ->willReturn(['status' => 'success']);
+
+        $resource = new Message($service, 'test-instance');
+        $result = $resource->sendImage(
+            '5511999999999',
+            'https://example.com/photo.png',
+            'Image caption'
+        );
+
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
     public function it_can_send_contact_message()
     {
         $result = $this->messageResource->sendContact(
