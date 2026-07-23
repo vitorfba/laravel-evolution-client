@@ -2,20 +2,20 @@
 
 // tests/Unit/Models/MessageModelTest.php
 
-namespace Happones\LaravelEvolutionClient\Tests\Unit\Models;
+namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Models;
 
-use Happones\LaravelEvolutionClient\Models\Contact;
-use Happones\LaravelEvolutionClient\Models\ContactMessage;
-use Happones\LaravelEvolutionClient\Models\ListMessage;
-use Happones\LaravelEvolutionClient\Models\ListRow;
-use Happones\LaravelEvolutionClient\Models\ListSection;
-use Happones\LaravelEvolutionClient\Models\LocationMessage;
-use Happones\LaravelEvolutionClient\Models\PollMessage;
-use Happones\LaravelEvolutionClient\Models\QuotedMessage;
-use Happones\LaravelEvolutionClient\Models\ReactionMessage;
-use Happones\LaravelEvolutionClient\Models\StatusMessage;
-use Happones\LaravelEvolutionClient\Models\TemplateMessage;
-use Happones\LaravelEvolutionClient\Models\TextMessage;
+use Vitorfba\LaravelEvolutionClient\Models\Contact;
+use Vitorfba\LaravelEvolutionClient\Models\ContactMessage;
+use Vitorfba\LaravelEvolutionClient\Models\ListMessage;
+use Vitorfba\LaravelEvolutionClient\Models\ListRow;
+use Vitorfba\LaravelEvolutionClient\Models\ListSection;
+use Vitorfba\LaravelEvolutionClient\Models\LocationMessage;
+use Vitorfba\LaravelEvolutionClient\Models\PollMessage;
+use Vitorfba\LaravelEvolutionClient\Models\QuotedMessage;
+use Vitorfba\LaravelEvolutionClient\Models\ReactionMessage;
+use Vitorfba\LaravelEvolutionClient\Models\StatusMessage;
+use Vitorfba\LaravelEvolutionClient\Models\TemplateMessage;
+use Vitorfba\LaravelEvolutionClient\Models\TextMessage;
 use PHPUnit\Framework\TestCase;
 
 class MessageModelTest extends TestCase

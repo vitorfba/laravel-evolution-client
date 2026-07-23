@@ -2,10 +2,10 @@
 
 // tests/Unit/Resources/TemplateResourceTest.php
 
-namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
+namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Resources;
 
-use Happones\LaravelEvolutionClient\Resources\Template;
-use Happones\LaravelEvolutionClient\Services\EvolutionService;
+use Vitorfba\LaravelEvolutionClient\Resources\Template;
+use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
 use PHPUnit\Framework\TestCase;
 
 class TemplateResourceTest extends TestCase

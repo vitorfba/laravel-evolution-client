@@ -1,7 +1,7 @@
 # AGENTS.md
 
 Guidance for AI coding agents (Claude Code, opencode, Antigravity, Cursor, …) working
-on **`happones/laravel-evolution-client`** — a Laravel HTTP client for the
+on **`vitorfba/laravel-evolution-client`** — a Laravel HTTP client for the
 [Evolution API v2](https://doc.evolution-api.com/) (WhatsApp integration).
 
 This file is the single source of truth. Tool-specific files
@@ -19,8 +19,8 @@ mocked test suite.
 
 - **PHP:** `^8.3` (CI runs 8.3, 8.4, 8.5)
 - **Laravel:** `^13.0` (`illuminate/*`), tested via `orchestra/testbench ^11.0`
-- **Namespace:** `Happones\LaravelEvolutionClient\` → `src/`
-- **Tests namespace:** `Happones\LaravelEvolutionClient\Tests\` → `tests/`
+- **Namespace:** `Vitorfba\LaravelEvolutionClient\` → `src/`
+- **Tests namespace:** `Vitorfba\LaravelEvolutionClient\Tests\` → `tests/`
 
 ---
 

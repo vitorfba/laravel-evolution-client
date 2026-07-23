@@ -2,7 +2,7 @@
 
 // src/Models/Label.php
 
-namespace Happones\LaravelEvolutionClient\Models;
+namespace Vitorfba\LaravelEvolutionClient\Models;
 
 use InvalidArgumentException;
 

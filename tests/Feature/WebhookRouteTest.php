@@ -1,10 +1,10 @@
 <?php
 
-namespace Happones\LaravelEvolutionClient\Tests\Feature;
+namespace Vitorfba\LaravelEvolutionClient\Tests\Feature;
 
-use Happones\LaravelEvolutionClient\Events\EvolutionWebhookReceived;
-use Happones\LaravelEvolutionClient\Jobs\ProcessEvolutionWebhook;
-use Happones\LaravelEvolutionClient\Tests\TestCase;
+use Vitorfba\LaravelEvolutionClient\Events\EvolutionWebhookReceived;
+use Vitorfba\LaravelEvolutionClient\Jobs\ProcessEvolutionWebhook;
+use Vitorfba\LaravelEvolutionClient\Tests\TestCase;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Event;
 

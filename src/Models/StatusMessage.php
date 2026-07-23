@@ -2,7 +2,7 @@
 
 // src/Models/StatusMessage.php
 
-namespace Happones\LaravelEvolutionClient\Models;
+namespace Vitorfba\LaravelEvolutionClient\Models;
 
 class StatusMessage
 {

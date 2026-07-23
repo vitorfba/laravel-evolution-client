@@ -1,8 +1,8 @@
 <?php
 
-namespace Happones\LaravelEvolutionClient\Webhook;
+namespace Vitorfba\LaravelEvolutionClient\Webhook;
 
-use Happones\LaravelEvolutionClient\Events\EvolutionWebhookReceived;
+use Vitorfba\LaravelEvolutionClient\Events\EvolutionWebhookReceived;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Http\Request;
 

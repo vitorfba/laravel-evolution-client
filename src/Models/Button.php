@@ -2,7 +2,7 @@
 
 // src/Models/Button.php
 
-namespace Happones\LaravelEvolutionClient\Models;
+namespace Vitorfba\LaravelEvolutionClient\Models;
 
 class Button
 {

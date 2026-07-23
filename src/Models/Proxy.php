@@ -2,7 +2,7 @@
 
 // src/Models/Proxy.php
 
-namespace Happones\LaravelEvolutionClient\Models;
+namespace Vitorfba\LaravelEvolutionClient\Models;
 
 class Proxy
 {

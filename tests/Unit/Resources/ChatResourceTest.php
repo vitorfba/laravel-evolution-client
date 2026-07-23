@@ -2,10 +2,10 @@
 
 // tests/Unit/Resources/ChatResourceTest.php
 
-namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
+namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Resources;
 
-use Happones\LaravelEvolutionClient\Resources\Chat;
-use Happones\LaravelEvolutionClient\Services\EvolutionService;
+use Vitorfba\LaravelEvolutionClient\Resources\Chat;
+use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
 use PHPUnit\Framework\TestCase;
 
 class ChatResourceTest extends TestCase

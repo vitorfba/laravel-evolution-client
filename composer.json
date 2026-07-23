@@ -1,5 +1,5 @@
 {
-  "name": "happones/laravel-evolution-client",
+  "name": "vitorfba/laravel-evolution-client",
   "description": "Laravel Client for Evolution API, allowing easy integration with WhatsApp.",
   "keywords": [
     "laravel",
@@ -8,16 +8,16 @@
     "evolution-api",
     "whatsapp"
   ],
-  "homepage": "https://github.com/happones/laravel-evolution-client",
+  "homepage": "https://github.com/vitorfba/laravel-evolution-client",
   "support": {
-    "issues": "https://github.com/happones/laravel-evolution-client/issues",
-    "source": "https://github.com/happones/laravel-evolution-client"
+    "issues": "https://github.com/vitorfba/laravel-evolution-client/issues",
+    "source": "https://github.com/vitorfba/laravel-evolution-client"
   },
   "license": "MIT",
   "authors": [
     {
-      "name": "Omar Hernandez",
-      "email": "happones@gmail.com",
+      "name": "Vitor",
+      "email": "vitorfba@gmail.com",
       "role": "Developer"
     }
   ],
@@ -42,12 +42,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Happones\\LaravelEvolutionClient\\": "src"
+      "Vitorfba\\LaravelEvolutionClient\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Happones\\LaravelEvolutionClient\\Tests\\": "tests"
+      "Vitorfba\\LaravelEvolutionClient\\Tests\\": "tests"
     }
   },
   "scripts": {
@@ -67,10 +67,10 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Happones\\LaravelEvolutionClient\\EvolutionServiceProvider"
+        "Vitorfba\\LaravelEvolutionClient\\EvolutionServiceProvider"
       ],
       "aliases": {
-        "Evolution": "Happones\\LaravelEvolutionClient\\Facades\\Evolution"
+        "Evolution": "Vitorfba\\LaravelEvolutionClient\\Facades\\Evolution"
       }
     }
   },

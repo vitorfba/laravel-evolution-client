@@ -7,7 +7,7 @@ this file is the short, always-on rule set.
 ## Project
 
 Spatie-style Laravel HTTP client for the **Evolution API v2** (WhatsApp).
-Namespace `Happones\LaravelEvolutionClient\` → `src/`. **PHP 8.3+ / Laravel 13.**
+Namespace `Vitorfba\LaravelEvolutionClient\` → `src/`. **PHP 8.3+ / Laravel 13.**
 
 ## Always
 

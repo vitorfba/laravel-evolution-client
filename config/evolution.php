@@ -79,7 +79,7 @@ return [
     | Configuration for receiving webhook callbacks from Evolution API. When the
     | route is enabled, the package registers a POST endpoint that parses the
     | payload into a WebhookEvent and dispatches Laravel events you can listen to
-    | (see Happones\LaravelEvolutionClient\Events\EvolutionWebhookReceived).
+    | (see Vitorfba\LaravelEvolutionClient\Events\EvolutionWebhookReceived).
     |
     */
     'webhook' => [

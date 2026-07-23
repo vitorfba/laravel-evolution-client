@@ -1,10 +1,10 @@
 <?php
 
-namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
+namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Resources;
 
-use Happones\LaravelEvolutionClient\Resources\OpenAIBot;
-use Happones\LaravelEvolutionClient\Services\EvolutionService;
-use Happones\LaravelEvolutionClient\Tests\TestCase;
+use Vitorfba\LaravelEvolutionClient\Resources\OpenAIBot;
+use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
+use Vitorfba\LaravelEvolutionClient\Tests\TestCase;
 use Mockery;
 
 class OpenAIBotResourceTest extends TestCase

@@ -2,10 +2,10 @@
 
 // tests/Unit/Resources/LabelResourceTest.php
 
-namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
+namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Resources;
 
-use Happones\LaravelEvolutionClient\Resources\Label;
-use Happones\LaravelEvolutionClient\Services\EvolutionService;
+use Vitorfba\LaravelEvolutionClient\Resources\Label;
+use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
 use PHPUnit\Framework\TestCase;
 
 class LabelResourceTest extends TestCase

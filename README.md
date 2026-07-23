@@ -1,10 +1,10 @@
 # Laravel Evolution Client
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/happones/laravel-evolution-client.svg?style=flat-square)](https://packagist.org/packages/happones/laravel-evolution-client)
-[![run-tests](https://github.com/happones/laravel-evolution-client/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/happones/laravel-evolution-client/actions/workflows/run-tests.yml)
-[![Fix PHP code style issues](https://github.com/happones/laravel-evolution-client/actions/workflows/fix-php-code-style-issues.yml/badge.svg?branch=main)](https://github.com/happones/laravel-evolution-client/actions/workflows/fix-php-code-style-issues.yml)
-[![PHPStan](https://github.com/happones/laravel-evolution-client/actions/workflows/phpstan.yml/badge.svg?branch=main)](https://github.com/happones/laravel-evolution-client/actions/workflows/phpstan.yml)
-[![Total Downloads](https://img.shields.io/packagist/dt/happones/laravel-evolution-client.svg?style=flat-square)](https://packagist.org/packages/happones/laravel-evolution-client)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/vitorfba/laravel-evolution-client.svg?style=flat-square)](https://packagist.org/packages/vitorfba/laravel-evolution-client)
+[![run-tests](https://github.com/vitorfba/laravel-evolution-client/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/vitorfba/laravel-evolution-client/actions/workflows/run-tests.yml)
+[![Fix PHP code style issues](https://github.com/vitorfba/laravel-evolution-client/actions/workflows/fix-php-code-style-issues.yml/badge.svg?branch=main)](https://github.com/vitorfba/laravel-evolution-client/actions/workflows/fix-php-code-style-issues.yml)
+[![PHPStan](https://github.com/vitorfba/laravel-evolution-client/actions/workflows/phpstan.yml/badge.svg?branch=main)](https://github.com/vitorfba/laravel-evolution-client/actions/workflows/phpstan.yml)
+[![Total Downloads](https://img.shields.io/packagist/dt/vitorfba/laravel-evolution-client.svg?style=flat-square)](https://packagist.org/packages/vitorfba/laravel-evolution-client)
 
 A Laravel client for the Evolution API, providing simple integration with WhatsApp for messaging, group management, and more.
 
@@ -22,7 +22,7 @@ A Laravel client for the Evolution API, providing simple integration with WhatsA
 You can install the package via composer:
 
 ```bash
-composer require happones/laravel-evolution-client
+composer require vitorfba/laravel-evolution-client
 ```
 
 You can publish the configuration file with:
@@ -118,7 +118,7 @@ EVOLUTION_DEFAULT_INSTANCE=default
 ### Using the Facade
 
 ```php
-use Happones\LaravelEvolutionClient\Facades\Evolution;
+use Vitorfba\LaravelEvolutionClient\Facades\Evolution;
 
 // Check QR Code
 $qrCode = Evolution::getQrCode();
@@ -133,7 +133,7 @@ $result = Evolution::sendText('5511999999999', 'Hello, this is a test message!')
 ### Using Different Instances
 
 ```php
-use Happones\LaravelEvolutionClient\Facades\Evolution;
+use Vitorfba\LaravelEvolutionClient\Facades\Evolution;
 
 // Use a specific instance
 $result = Evolution::instance('my-instance')->sendText('5511999999999', 'Hello!');
@@ -142,7 +142,7 @@ $result = Evolution::instance('my-instance')->sendText('5511999999999', 'Hello!'
 ### Working with Chats
 
 ```php
-use Happones\LaravelEvolutionClient\Facades\Evolution;
+use Vitorfba\LaravelEvolutionClient\Facades\Evolution;
 
 // List all chats
 $chats = Evolution::chat->all();
@@ -160,7 +160,7 @@ Evolution::chat->markAsRead('5511999999999');
 ### Working with Groups
 
 ```php
-use Happones\LaravelEvolutionClient\Facades\Evolution;
+use Vitorfba\LaravelEvolutionClient\Facades\Evolution;
 
 // List all groups
 $groups = Evolution::group->all();
@@ -183,10 +183,10 @@ Evolution::group->promoteToAdmin($groupId, '5511999999999');
 ### Sending Different Types of Messages
 
 ```php
-use Happones\LaravelEvolutionClient\Facades\Evolution;
-use Happones\LaravelEvolutionClient\Models\Button;
-use Happones\LaravelEvolutionClient\Models\ListRow;
-use Happones\LaravelEvolutionClient\Models\ListSection;
+use Vitorfba\LaravelEvolutionClient\Facades\Evolution;
+use Vitorfba\LaravelEvolutionClient\Models\Button;
+use Vitorfba\LaravelEvolutionClient\Models\ListRow;
+use Vitorfba\LaravelEvolutionClient\Models\ListSection;
 
 // Send text
 Evolution::message->sendText('5511999999999', 'Hello, how are you?');
@@ -268,7 +268,7 @@ Evolution::message->sendStatus(
 ### Working with Labels
 
 ```php
-use Happones\LaravelEvolutionClient\Facades\Evolution;
+use Vitorfba\LaravelEvolutionClient\Facades\Evolution;
 
 // List all labels
 $labels = Evolution::label->findLabels();
@@ -283,7 +283,7 @@ Evolution::label->removeLabel('5511999999999', 'label_id_123');
 ### Working with Calls
 
 ```php
-use Happones\LaravelEvolutionClient\Facades\Evolution;
+use Vitorfba\LaravelEvolutionClient\Facades\Evolution;
 
 // Make a fake call
 Evolution::call->fakeCall('5511999999999', false, 45); // Voice call with 45 seconds
@@ -293,7 +293,7 @@ Evolution::call->fakeCall('5511999999999', true, 30);  // Video call with 30 sec
 ### Working with Profile
 
 ```php
-use Happones\LaravelEvolutionClient\Facades\Evolution;
+use Vitorfba\LaravelEvolutionClient\Facades\Evolution;
 
 // Fetch a contact's profile
 $profile = Evolution::profile->fetchProfile('5511999999999');
@@ -330,7 +330,7 @@ Evolution::profile->updatePrivacySettings(
 ### Working with WebSocket
 
 ```php
-use Happones\LaravelEvolutionClient\Facades\Evolution;
+use Vitorfba\LaravelEvolutionClient\Facades\Evolution;
 
 // Configure WebSocket
 Evolution::websocket->setWebSocket(true, [
@@ -503,8 +503,8 @@ own controller and call `WebhookProcessor::process($request)` yourself.)
 named `evolution.webhook.{event}` event:
 
 ```php
-use Happones\LaravelEvolutionClient\Events\EvolutionWebhookReceived;
-use Happones\LaravelEvolutionClient\Webhook\WebhookEvent;
+use Vitorfba\LaravelEvolutionClient\Events\EvolutionWebhookReceived;
+use Vitorfba\LaravelEvolutionClient\Webhook\WebhookEvent;
 
 Event::listen(function (EvolutionWebhookReceived $received) {
     $event = $received->webhook;                 // WebhookEvent
@@ -532,7 +532,7 @@ instead of running inline:
 You can also register inline callbacks without Laravel events:
 
 ```php
-app(\Happones\LaravelEvolutionClient\Webhook\WebhookProcessor::class)
+app(\Vitorfba\LaravelEvolutionClient\Webhook\WebhookProcessor::class)
     ->on(WebhookEvent::MESSAGES_UPSERT, fn (WebhookEvent $e) => logger($e->toArray()))
     ->onAny(fn (WebhookEvent $e) => logger("event: {$e->name()}"));
 ```
@@ -556,11 +556,11 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security
 
-If you discover any security-related issues, please email happones@gmail.com instead of using the issue tracker.
+If you discover any security-related issues, please open an issue on GitHub instead of using the issue tracker for sensitive reports, or contact the maintainer privately.
 
 ## Credits
 
-- [Samuel Terra](https://github.com/happones)
+- [Vitor](https://github.com/vitorfba)
 - [All Contributors](../../contributors)
 
 ## License

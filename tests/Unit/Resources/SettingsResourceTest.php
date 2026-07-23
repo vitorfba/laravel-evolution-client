@@ -2,10 +2,10 @@
 
 // tests/Unit/Resources/SettingsResourceTest.php
 
-namespace Happones\LaravelEvolutionClient\Tests\Unit\Resources;
+namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Resources;
 
-use Happones\LaravelEvolutionClient\Resources\Settings;
-use Happones\LaravelEvolutionClient\Services\EvolutionService;
+use Vitorfba\LaravelEvolutionClient\Resources\Settings;
+use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
 use PHPUnit\Framework\TestCase;
 
 class SettingsResourceTest extends TestCase

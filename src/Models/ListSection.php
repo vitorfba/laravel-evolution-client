@@ -2,7 +2,7 @@
 
 // src/Models/ListSection.php
 
-namespace Happones\LaravelEvolutionClient\Models;
+namespace Vitorfba\LaravelEvolutionClient\Models;
 
 class ListSection
 {

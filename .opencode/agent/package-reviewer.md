@@ -10,7 +10,7 @@ tools:
   write: false
 ---
 
-You review changes to `happones/laravel-evolution-client`. **Read `AGENTS.md`** for the
+You review changes to `vitorfba/laravel-evolution-client`. **Read `AGENTS.md`** for the
 conventions you enforce. Critique only; do not edit. Start from `git diff`.
 
 Checklist:

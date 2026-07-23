@@ -1,10 +1,10 @@
 <?php
 
-namespace Happones\LaravelEvolutionClient\Tests\Unit\Webhook;
+namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Webhook;
 
-use Happones\LaravelEvolutionClient\Events\EvolutionWebhookReceived;
-use Happones\LaravelEvolutionClient\Webhook\WebhookEvent;
-use Happones\LaravelEvolutionClient\Webhook\WebhookProcessor;
+use Vitorfba\LaravelEvolutionClient\Events\EvolutionWebhookReceived;
+use Vitorfba\LaravelEvolutionClient\Webhook\WebhookEvent;
+use Vitorfba\LaravelEvolutionClient\Webhook\WebhookProcessor;
 use Illuminate\Events\Dispatcher;
 use PHPUnit\Framework\TestCase;
 

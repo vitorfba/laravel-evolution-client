@@ -1,10 +1,10 @@
 <?php
 
-namespace Happones\LaravelEvolutionClient\Http\Controllers;
+namespace Vitorfba\LaravelEvolutionClient\Http\Controllers;
 
-use Happones\LaravelEvolutionClient\Jobs\ProcessEvolutionWebhook;
-use Happones\LaravelEvolutionClient\Webhook\WebhookEvent;
-use Happones\LaravelEvolutionClient\Webhook\WebhookProcessor;
+use Vitorfba\LaravelEvolutionClient\Jobs\ProcessEvolutionWebhook;
+use Vitorfba\LaravelEvolutionClient\Webhook\WebhookEvent;
+use Vitorfba\LaravelEvolutionClient\Webhook\WebhookProcessor;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

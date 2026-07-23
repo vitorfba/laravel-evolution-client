@@ -2,11 +2,11 @@
 
 // tests/Feature/EvolutionServiceProviderTest.php
 
-namespace Happones\LaravelEvolutionClient\Tests\Feature;
+namespace Vitorfba\LaravelEvolutionClient\Tests\Feature;
 
-use Happones\LaravelEvolutionClient\EvolutionApiClient;
-use Happones\LaravelEvolutionClient\EvolutionServiceProvider;
-use Happones\LaravelEvolutionClient\Facades\Evolution;
+use Vitorfba\LaravelEvolutionClient\EvolutionApiClient;
+use Vitorfba\LaravelEvolutionClient\EvolutionServiceProvider;
+use Vitorfba\LaravelEvolutionClient\Facades\Evolution;
 use Orchestra\Testbench\TestCase;
 
 class EvolutionServiceProviderTest extends TestCase
@@ -36,27 +36,27 @@ class EvolutionServiceProviderTest extends TestCase
     public function the_facade_provides_access_to_all_resources()
     {
         $client = app('evolution');
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Chat', $client->chat);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Group', $client->group);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Message', $client->message);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Instance', $client->instance);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Call', $client->call);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Label', $client->label);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Profile', $client->profile);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\WebSocket', $client->websocket);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Proxy', $client->proxy);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Settings', $client->settings);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Template', $client->template);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\OpenAIBot', $client->openAIBot);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\EvolutionBot', $client->evolutionBot);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Business', $client->business);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Chat', $client->chat);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Group', $client->group);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Message', $client->message);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Instance', $client->instance);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Call', $client->call);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Label', $client->label);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Profile', $client->profile);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\WebSocket', $client->websocket);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Proxy', $client->proxy);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Settings', $client->settings);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Template', $client->template);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\OpenAIBot', $client->openAIBot);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\EvolutionBot', $client->evolutionBot);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Business', $client->business);
     }
 
     /** @test */
     public function it_publishes_the_config()
     {
         $this->artisan('vendor:publish', [
-            '--provider' => 'Happones\LaravelEvolutionClient\EvolutionServiceProvider',
+            '--provider' => 'Vitorfba\LaravelEvolutionClient\EvolutionServiceProvider',
             '--tag' => 'evolution-config',
         ]);
 

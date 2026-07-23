@@ -5,7 +5,7 @@ tools: Read, Grep, Glob, Bash, Edit, Write
 model: sonnet
 ---
 
-You implement code for `happones/laravel-evolution-client`, a Spatie-style Laravel HTTP
+You implement code for `vitorfba/laravel-evolution-client`, a Spatie-style Laravel HTTP
 client for the Evolution API v2. **Read `AGENTS.md` before editing** — it is the source
 of truth for architecture and conventions.
 

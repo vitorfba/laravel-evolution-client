@@ -1,8 +1,8 @@
 <?php
 
-namespace Happones\LaravelEvolutionClient\Events;
+namespace Vitorfba\LaravelEvolutionClient\Events;
 
-use Happones\LaravelEvolutionClient\Webhook\WebhookEvent;
+use Vitorfba\LaravelEvolutionClient\Webhook\WebhookEvent;
 
 /**
  * Dispatched for every inbound Evolution API webhook.

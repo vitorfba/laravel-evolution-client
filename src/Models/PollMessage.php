@@ -2,7 +2,7 @@
 
 // src/Models/PollMessage.php
 
-namespace Happones\LaravelEvolutionClient\Models;
+namespace Vitorfba\LaravelEvolutionClient\Models;
 
 class PollMessage
 {

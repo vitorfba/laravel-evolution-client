@@ -2,11 +2,11 @@
 
 // src/Resources/Call.php
 
-namespace Happones\LaravelEvolutionClient\Resources;
+namespace Vitorfba\LaravelEvolutionClient\Resources;
 
-use Happones\LaravelEvolutionClient\Exceptions\EvolutionApiException;
-use Happones\LaravelEvolutionClient\Models\Call as CallModel;
-use Happones\LaravelEvolutionClient\Services\EvolutionService;
+use Vitorfba\LaravelEvolutionClient\Exceptions\EvolutionApiException;
+use Vitorfba\LaravelEvolutionClient\Models\Call as CallModel;
+use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
 
 class Call
 {

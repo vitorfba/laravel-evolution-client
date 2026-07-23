@@ -2,23 +2,23 @@
 
 // src/Facades/Evolution.php
 
-namespace Happones\LaravelEvolutionClient\Facades;
+namespace Vitorfba\LaravelEvolutionClient\Facades;
 
-use Happones\LaravelEvolutionClient\EvolutionApiClient;
-use Happones\LaravelEvolutionClient\Resources\Business;
-use Happones\LaravelEvolutionClient\Resources\Call;
-use Happones\LaravelEvolutionClient\Resources\Chat;
-use Happones\LaravelEvolutionClient\Resources\EvolutionBot;
-use Happones\LaravelEvolutionClient\Resources\Group;
-use Happones\LaravelEvolutionClient\Resources\Instance;
-use Happones\LaravelEvolutionClient\Resources\Label;
-use Happones\LaravelEvolutionClient\Resources\Message;
-use Happones\LaravelEvolutionClient\Resources\OpenAIBot;
-use Happones\LaravelEvolutionClient\Resources\Profile;
-use Happones\LaravelEvolutionClient\Resources\Proxy;
-use Happones\LaravelEvolutionClient\Resources\Settings;
-use Happones\LaravelEvolutionClient\Resources\Template;
-use Happones\LaravelEvolutionClient\Resources\WebSocket;
+use Vitorfba\LaravelEvolutionClient\EvolutionApiClient;
+use Vitorfba\LaravelEvolutionClient\Resources\Business;
+use Vitorfba\LaravelEvolutionClient\Resources\Call;
+use Vitorfba\LaravelEvolutionClient\Resources\Chat;
+use Vitorfba\LaravelEvolutionClient\Resources\EvolutionBot;
+use Vitorfba\LaravelEvolutionClient\Resources\Group;
+use Vitorfba\LaravelEvolutionClient\Resources\Instance;
+use Vitorfba\LaravelEvolutionClient\Resources\Label;
+use Vitorfba\LaravelEvolutionClient\Resources\Message;
+use Vitorfba\LaravelEvolutionClient\Resources\OpenAIBot;
+use Vitorfba\LaravelEvolutionClient\Resources\Profile;
+use Vitorfba\LaravelEvolutionClient\Resources\Proxy;
+use Vitorfba\LaravelEvolutionClient\Resources\Settings;
+use Vitorfba\LaravelEvolutionClient\Resources\Template;
+use Vitorfba\LaravelEvolutionClient\Resources\WebSocket;
 use Illuminate\Support\Facades\Facade;
 
 /**

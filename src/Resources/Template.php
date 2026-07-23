@@ -2,10 +2,10 @@
 
 // src/Resources/Template.php
 
-namespace Happones\LaravelEvolutionClient\Resources;
+namespace Vitorfba\LaravelEvolutionClient\Resources;
 
-use Happones\LaravelEvolutionClient\Exceptions\EvolutionApiException;
-use Happones\LaravelEvolutionClient\Services\EvolutionService;
+use Vitorfba\LaravelEvolutionClient\Exceptions\EvolutionApiException;
+use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
 
 class Template
 {

@@ -5,7 +5,7 @@ tools: Read, Grep, Glob, Bash, Edit, Write
 model: sonnet
 ---
 
-You maintain the docs for `happones/laravel-evolution-client`.
+You maintain the docs for `vitorfba/laravel-evolution-client`.
 
 ## What to keep in sync
 

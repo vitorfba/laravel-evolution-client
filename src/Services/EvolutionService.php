@@ -2,13 +2,13 @@
 
 // src/Services/EvolutionService.php
 
-namespace Happones\LaravelEvolutionClient\Services;
+namespace Vitorfba\LaravelEvolutionClient\Services;
 
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
-use Happones\LaravelEvolutionClient\Exceptions\EvolutionApiException;
+use Vitorfba\LaravelEvolutionClient\Exceptions\EvolutionApiException;
 
 class EvolutionService
 {

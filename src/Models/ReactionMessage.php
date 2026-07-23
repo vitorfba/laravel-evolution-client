@@ -2,7 +2,7 @@
 
 // src/Models/ReactionMessage.php
 
-namespace Happones\LaravelEvolutionClient\Models;
+namespace Vitorfba\LaravelEvolutionClient\Models;
 
 class ReactionMessage
 {

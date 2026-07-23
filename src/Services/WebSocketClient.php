@@ -2,7 +2,7 @@
 
 // src/Services/WebSocketClient.php
 
-namespace Happones\LaravelEvolutionClient\Services;
+namespace Vitorfba\LaravelEvolutionClient\Services;
 
 use Exception;
 use Illuminate\Support\Facades\Log;

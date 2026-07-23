@@ -1,9 +1,9 @@
 <?php
 
-namespace Happones\LaravelEvolutionClient\Jobs;
+namespace Vitorfba\LaravelEvolutionClient\Jobs;
 
-use Happones\LaravelEvolutionClient\Webhook\WebhookEvent;
-use Happones\LaravelEvolutionClient\Webhook\WebhookProcessor;
+use Vitorfba\LaravelEvolutionClient\Webhook\WebhookEvent;
+use Vitorfba\LaravelEvolutionClient\Webhook\WebhookProcessor;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

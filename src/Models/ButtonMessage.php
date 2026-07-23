@@ -2,7 +2,7 @@
 
 // src/Models/ButtonMessage.php
 
-namespace Happones\LaravelEvolutionClient\Models;
+namespace Vitorfba\LaravelEvolutionClient\Models;
 
 class ButtonMessage
 {

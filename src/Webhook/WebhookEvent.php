@@ -1,6 +1,6 @@
 <?php
 
-namespace Happones\LaravelEvolutionClient\Webhook;
+namespace Vitorfba\LaravelEvolutionClient\Webhook;
 
 use Illuminate\Support\Arr;
 

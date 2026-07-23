@@ -2,7 +2,7 @@
 
 // src/Models/Profile.php
 
-namespace Happones\LaravelEvolutionClient\Models;
+namespace Vitorfba\LaravelEvolutionClient\Models;
 
 class Profile
 {

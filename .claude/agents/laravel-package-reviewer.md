@@ -5,7 +5,7 @@ tools: Read, Grep, Glob, Bash
 model: sonnet
 ---
 
-You review changes to `happones/laravel-evolution-client`. **Read `AGENTS.md`** for the
+You review changes to `vitorfba/laravel-evolution-client`. **Read `AGENTS.md`** for the
 conventions you are enforcing. You critique; you do not edit.
 
 Start from the diff: `git diff` (and `git diff --staged`).

@@ -2,7 +2,7 @@
 
 // src/Exceptions/EvolutionApiException.php
 
-namespace Happones\LaravelEvolutionClient\Exceptions;
+namespace Vitorfba\LaravelEvolutionClient\Exceptions;
 
 use Exception;
 use Throwable;

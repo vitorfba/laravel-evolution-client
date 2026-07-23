@@ -2,15 +2,15 @@
 
 // tests/TestCase.php
 
-namespace Happones\LaravelEvolutionClient\Tests;
+namespace Vitorfba\LaravelEvolutionClient\Tests;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
-use Happones\LaravelEvolutionClient\EvolutionServiceProvider;
-use Happones\LaravelEvolutionClient\Facades\Evolution;
-use Happones\LaravelEvolutionClient\Services\EvolutionService;
+use Vitorfba\LaravelEvolutionClient\EvolutionServiceProvider;
+use Vitorfba\LaravelEvolutionClient\Facades\Evolution;
+use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
 use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 

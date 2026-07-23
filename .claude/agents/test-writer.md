@@ -5,7 +5,7 @@ tools: Read, Grep, Glob, Bash, Edit, Write
 model: sonnet
 ---
 
-You write tests for `happones/laravel-evolution-client`. **Read `AGENTS.md` §5** and an
+You write tests for `vitorfba/laravel-evolution-client`. **Read `AGENTS.md` §5** and an
 existing test before writing.
 
 ## The pattern (do not hit the network)

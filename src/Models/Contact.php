@@ -2,7 +2,7 @@
 
 // src/Models/Contact.php
 
-namespace Happones\LaravelEvolutionClient\Models;
+namespace Vitorfba\LaravelEvolutionClient\Models;
 
 class Contact
 {

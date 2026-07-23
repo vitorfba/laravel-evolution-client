@@ -2,11 +2,11 @@
 
 // src/Resources/Proxy.php
 
-namespace Happones\LaravelEvolutionClient\Resources;
+namespace Vitorfba\LaravelEvolutionClient\Resources;
 
-use Happones\LaravelEvolutionClient\Exceptions\EvolutionApiException;
-use Happones\LaravelEvolutionClient\Models\Proxy as ProxyModel;
-use Happones\LaravelEvolutionClient\Services\EvolutionService;
+use Vitorfba\LaravelEvolutionClient\Exceptions\EvolutionApiException;
+use Vitorfba\LaravelEvolutionClient\Models\Proxy as ProxyModel;
+use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
 
 class Proxy
 {

@@ -2,15 +2,15 @@
 
 // tests/Unit/EvolutionApiClientTest.php
 
-namespace Happones\LaravelEvolutionClient\Tests\Unit;
+namespace Vitorfba\LaravelEvolutionClient\Tests\Unit;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
-use Happones\LaravelEvolutionClient\EvolutionApiClient;
-use Happones\LaravelEvolutionClient\Services\EvolutionService;
-use Happones\LaravelEvolutionClient\Tests\TestCase;
+use Vitorfba\LaravelEvolutionClient\EvolutionApiClient;
+use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
+use Vitorfba\LaravelEvolutionClient\Tests\TestCase;
 
 class EvolutionApiClientTest extends TestCase
 {
@@ -41,20 +41,20 @@ class EvolutionApiClientTest extends TestCase
     /** @test */
     public function it_provides_access_to_all_resources()
     {
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Chat', $this->client->chat);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Group', $this->client->group);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Message', $this->client->message);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Instance', $this->client->instance);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Call', $this->client->call);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Label', $this->client->label);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Profile', $this->client->profile);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\WebSocket', $this->client->websocket);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Proxy', $this->client->proxy);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Settings', $this->client->settings);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Template', $this->client->template);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\OpenAIBot', $this->client->openAIBot);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\EvolutionBot', $this->client->evolutionBot);
-        $this->assertInstanceOf('Happones\LaravelEvolutionClient\Resources\Business', $this->client->business);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Chat', $this->client->chat);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Group', $this->client->group);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Message', $this->client->message);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Instance', $this->client->instance);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Call', $this->client->call);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Label', $this->client->label);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Profile', $this->client->profile);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\WebSocket', $this->client->websocket);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Proxy', $this->client->proxy);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Settings', $this->client->settings);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Template', $this->client->template);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\OpenAIBot', $this->client->openAIBot);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\EvolutionBot', $this->client->evolutionBot);
+        $this->assertInstanceOf('Vitorfba\LaravelEvolutionClient\Resources\Business', $this->client->business);
     }
 
     /** @test */

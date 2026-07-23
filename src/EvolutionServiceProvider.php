@@ -2,11 +2,11 @@
 
 // src/EvolutionServiceProvider.php
 
-namespace Happones\LaravelEvolutionClient;
+namespace Vitorfba\LaravelEvolutionClient;
 
-use Happones\LaravelEvolutionClient\Http\Controllers\WebhookController;
-use Happones\LaravelEvolutionClient\Services\EvolutionService;
-use Happones\LaravelEvolutionClient\Webhook\WebhookProcessor;
+use Vitorfba\LaravelEvolutionClient\Http\Controllers\WebhookController;
+use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
+use Vitorfba\LaravelEvolutionClient\Webhook\WebhookProcessor;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;

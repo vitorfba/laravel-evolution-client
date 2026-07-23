@@ -1,13 +1,13 @@
 ---
 name: laravel-evolution-client
-description: How to use the happones/laravel-evolution-client package to talk to the Evolution API v2 (WhatsApp) from Laravel — send messages, manage instances, chats, groups, labels, profiles and webhooks via the Evolution facade. Use whenever the app integrates WhatsApp through Evolution API.
+description: How to use the vitorfba/laravel-evolution-client package to talk to the Evolution API v2 (WhatsApp) from Laravel — send messages, manage instances, chats, groups, labels, profiles and webhooks via the Evolution facade. Use whenever the app integrates WhatsApp through Evolution API.
 ---
 
 # Laravel Evolution Client
 
 A Laravel HTTP client for the **Evolution API v2** (WhatsApp). Exposes a fluent
 `Evolution` facade backed by per-domain Resources. All calls return `array` (the decoded
-API response) and throw `Happones\LaravelEvolutionClient\Exceptions\EvolutionApiException`
+API response) and throw `Vitorfba\LaravelEvolutionClient\Exceptions\EvolutionApiException`
 on API failures.
 
 ## Setup
@@ -28,7 +28,7 @@ runtime with `Evolution::instance('name')`, which returns the client so you can 
 a resource.
 
 ```php
-use Happones\LaravelEvolutionClient\Facades\Evolution;
+use Vitorfba\LaravelEvolutionClient\Facades\Evolution;
 
 // Uses the default instance
 Evolution::sendText('5511999999999', 'Hello from Laravel');
@@ -74,7 +74,7 @@ Evolution::instance('sales')->profile->fetchProfile('5511999999999');
 ## Error handling
 
 ```php
-use Happones\LaravelEvolutionClient\Exceptions\EvolutionApiException;
+use Vitorfba\LaravelEvolutionClient\Exceptions\EvolutionApiException;
 
 try {
     Evolution::sendText('5511999999999', 'Hi');

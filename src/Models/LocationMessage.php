@@ -2,7 +2,7 @@
 
 // src/Models/LocationMessage.php
 
-namespace Happones\LaravelEvolutionClient\Models;
+namespace Vitorfba\LaravelEvolutionClient\Models;
 
 class LocationMessage
 {

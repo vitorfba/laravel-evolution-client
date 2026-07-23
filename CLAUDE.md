@@ -8,7 +8,7 @@ Guidance for [Claude Code](https://docs.claude.com/en/docs/claude-code) working 
 
 ## TL;DR
 
-`happones/laravel-evolution-client` — a Laravel HTTP client for the Evolution API v2
+`vitorfba/laravel-evolution-client` — a Laravel HTTP client for the Evolution API v2
 (WhatsApp). Framework package, Spatie-style. PHP `^8.3`, Laravel `^13.0`.
 
 ## The three gates (run before every commit / release)

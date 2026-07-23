@@ -2,7 +2,7 @@
 
 // src/Models/Call.php
 
-namespace Happones\LaravelEvolutionClient\Models;
+namespace Vitorfba\LaravelEvolutionClient\Models;
 
 class Call
 {

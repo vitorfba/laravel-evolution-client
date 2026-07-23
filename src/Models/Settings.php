@@ -2,7 +2,7 @@
 
 // src/Models/Settings.php
 
-namespace Happones\LaravelEvolutionClient\Models;
+namespace Vitorfba\LaravelEvolutionClient\Models;
 
 class Settings
 {

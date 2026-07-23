@@ -2,19 +2,19 @@
 
 // src/Resources/Message.php
 
-namespace Happones\LaravelEvolutionClient\Resources;
+namespace Vitorfba\LaravelEvolutionClient\Resources;
 
-use Happones\LaravelEvolutionClient\Exceptions\EvolutionApiException;
-use Happones\LaravelEvolutionClient\Models\ButtonMessage;
-use Happones\LaravelEvolutionClient\Models\Contact;
-use Happones\LaravelEvolutionClient\Models\ContactMessage;
-use Happones\LaravelEvolutionClient\Models\ListMessage;
-use Happones\LaravelEvolutionClient\Models\PollMessage;
-use Happones\LaravelEvolutionClient\Models\ReactionMessage;
-use Happones\LaravelEvolutionClient\Models\StatusMessage;
-use Happones\LaravelEvolutionClient\Models\TemplateMessage;
-use Happones\LaravelEvolutionClient\Models\TextMessage;
-use Happones\LaravelEvolutionClient\Services\EvolutionService;
+use Vitorfba\LaravelEvolutionClient\Exceptions\EvolutionApiException;
+use Vitorfba\LaravelEvolutionClient\Models\ButtonMessage;
+use Vitorfba\LaravelEvolutionClient\Models\Contact;
+use Vitorfba\LaravelEvolutionClient\Models\ContactMessage;
+use Vitorfba\LaravelEvolutionClient\Models\ListMessage;
+use Vitorfba\LaravelEvolutionClient\Models\PollMessage;
+use Vitorfba\LaravelEvolutionClient\Models\ReactionMessage;
+use Vitorfba\LaravelEvolutionClient\Models\StatusMessage;
+use Vitorfba\LaravelEvolutionClient\Models\TemplateMessage;
+use Vitorfba\LaravelEvolutionClient\Models\TextMessage;
+use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
 use InvalidArgumentException;
 
 class Message
