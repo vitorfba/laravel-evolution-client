@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-07-23
+
+### Fixed
+- Treat Evolution `"error": false` responses as success (e.g. instance logout).
+- Accept empty response bodies on DELETE as success.
+- Stop re-wrapping `EvolutionApiException` as "Unexpected error".
+
 ## [1.1.0] - 2026-07-23
 
 ### Added

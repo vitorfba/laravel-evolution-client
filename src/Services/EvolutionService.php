@@ -148,7 +148,7 @@ class EvolutionService
      * Evolution frequently returns `"error": false` on success (e.g. logout).
      * `isset($data['error'])` is true for false, so we must ignore falsy error values.
      *
-     * @param  array<string, mixed>  $data
+     * @param array<string, mixed> $data
      */
     protected function responseIndicatesError(array $data): bool
     {
@@ -172,7 +172,7 @@ class EvolutionService
     }
 
     /**
-     * @param  array<string, mixed>  $data
+     * @param array<string, mixed> $data
      */
     protected function extractErrorMessage(array $data): string
     {
