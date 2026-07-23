@@ -21,32 +21,87 @@ class ChatResourceTest extends TestCase
     protected $service;
 
     /** @test */
-    public function it_can_get_all_chats()
+    public function it_can_get_all_chats_via_find_chats()
     {
-        $result = $this->chatResource->all();
+        $service = $this->makeService();
+        $service->expects($this->once())
+            ->method('post')
+            ->with('/chat/findChats/test-instance', [])
+            ->willReturn(['status' => 'success']);
 
-        $this->assertIsArray($result);
-        $this->assertEquals('success', $result['status']);
-        $this->assertArrayHasKey('chats', $result);
-    }
+        $result = (new Chat($service, 'test-instance'))->all();
 
-    /** @test */
-    public function it_can_find_chat()
-    {
-        $result = $this->chatResource->find('5511999999999');
-
-        $this->assertIsArray($result);
         $this->assertEquals('success', $result['status']);
     }
 
     /** @test */
-    public function it_can_get_chat_messages()
+    public function it_can_find_chat_via_find_chats()
     {
-        $result = $this->chatResource->messages('5511999999999', 20);
+        $service = $this->makeService();
+        $service->expects($this->once())
+            ->method('post')
+            ->with('/chat/findChats/test-instance', [
+                'where' => ['remoteJid' => '5511999999999@s.whatsapp.net'],
+            ])
+            ->willReturn(['status' => 'success']);
 
-        $this->assertIsArray($result);
+        $result = (new Chat($service, 'test-instance'))->find('5511999999999');
+
         $this->assertEquals('success', $result['status']);
-        $this->assertArrayHasKey('messages', $result);
+    }
+
+    /** @test */
+    public function it_can_get_chat_messages_via_find_messages()
+    {
+        $service = $this->makeService();
+        $service->expects($this->once())
+            ->method('post')
+            ->with('/chat/findMessages/test-instance', [
+                'where' => ['key' => ['remoteJid' => '5511999999999@s.whatsapp.net']],
+                'limit' => 20,
+            ])
+            ->willReturn(['status' => 'success']);
+
+        $result = (new Chat($service, 'test-instance'))->messages('5511999999999', 20);
+
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_can_delete_message_for_everyone()
+    {
+        $service = $this->makeService();
+        $service->expects($this->once())
+            ->method('deleteJson')
+            ->with('/chat/deleteMessageForEveryone/test-instance', [
+                'id' => 'ABC123',
+                'remoteJid' => '5511999999999@s.whatsapp.net',
+                'fromMe' => true,
+            ])
+            ->willReturn(['status' => 'success']);
+
+        $result = (new Chat($service, 'test-instance'))
+            ->deleteMessageForEveryone('ABC123', '5511999999999@s.whatsapp.net', true);
+
+        $this->assertEquals('success', $result['status']);
+    }
+
+    /** @test */
+    public function it_sends_participant_when_deleting_group_message()
+    {
+        $service = $this->makeService();
+        $service->expects($this->once())
+            ->method('deleteJson')
+            ->with('/chat/deleteMessageForEveryone/test-instance', [
+                'id' => 'ABC123',
+                'remoteJid' => '123456789@g.us',
+                'fromMe' => false,
+                'participant' => '5511999999999@s.whatsapp.net',
+            ])
+            ->willReturn(['status' => 'success']);
+
+        (new Chat($service, 'test-instance'))
+            ->deleteMessageForEveryone('ABC123', '123456789@g.us', false, '5511999999999@s.whatsapp.net');
     }
 
     /** @test */
@@ -182,37 +237,67 @@ class ChatResourceTest extends TestCase
     /** @test */
     public function it_can_find_chats()
     {
-        $result = $this->chatResource->findChats(['where' => ['id' => 'foo']]);
+        $service = $this->makeService();
+        $service->expects($this->once())
+            ->method('post')
+            ->with('/chat/findChats/test-instance', ['where' => ['id' => 'foo']])
+            ->willReturn(['status' => 'success']);
 
-        $this->assertIsArray($result);
+        $result = (new Chat($service, 'test-instance'))->findChats(['where' => ['id' => 'foo']]);
+
         $this->assertEquals('success', $result['status']);
     }
 
     /** @test */
     public function it_can_find_messages()
     {
-        $result = $this->chatResource->findMessages(['where' => ['id' => 'foo']]);
+        $service = $this->makeService();
+        $service->expects($this->once())
+            ->method('post')
+            ->with('/chat/findMessages/test-instance', ['where' => ['id' => 'foo']])
+            ->willReturn(['status' => 'success']);
 
-        $this->assertIsArray($result);
+        $result = (new Chat($service, 'test-instance'))->findMessages(['where' => ['id' => 'foo']]);
+
         $this->assertEquals('success', $result['status']);
     }
 
     /** @test */
     public function it_can_find_contacts()
     {
-        $result = $this->chatResource->findContacts(['where' => ['id' => 'foo']]);
+        $service = $this->makeService();
+        $service->expects($this->once())
+            ->method('post')
+            ->with('/chat/findContacts/test-instance', ['where' => ['id' => 'foo']])
+            ->willReturn(['status' => 'success']);
 
-        $this->assertIsArray($result);
+        $result = (new Chat($service, 'test-instance'))->findContacts(['where' => ['id' => 'foo']]);
+
         $this->assertEquals('success', $result['status']);
     }
 
     /** @test */
     public function it_can_verify_whatsapp_numbers()
     {
-        $result = $this->chatResource->whatsappNumbers(['5511999999999']);
+        $service = $this->makeService();
+        $service->expects($this->once())
+            ->method('post')
+            ->with('/chat/whatsappNumbers/test-instance', ['numbers' => ['5511999999999']])
+            ->willReturn(['status' => 'success']);
 
-        $this->assertIsArray($result);
+        $result = (new Chat($service, 'test-instance'))->whatsappNumbers(['5511999999999']);
+
         $this->assertEquals('success', $result['status']);
+    }
+
+    /**
+     * @return EvolutionService&\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected function makeService()
+    {
+        return $this->getMockBuilder(EvolutionService::class)
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 
     protected function setUp(): void

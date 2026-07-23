@@ -70,10 +70,30 @@ class MessageResourceTest extends TestCase
         };
 
         // Test with regular number
-        $this->assertEquals('5511999999999@c.us', $messageResource->publicFormatPhoneNumber('5511999999999'));
+        $this->assertEquals('5511999999999', $messageResource->publicFormatPhoneNumber('5511999999999'));
 
         // Test with formatted number
-        $this->assertEquals('5511999999999@c.us', $messageResource->publicFormatPhoneNumber('+55 (11) 99999-9999'));
+        $this->assertEquals('5511999999999', $messageResource->publicFormatPhoneNumber('+55 (11) 99999-9999'));
+    }
+
+    /** @test */
+    public function it_does_not_duplicate_an_existing_group_jid_suffix()
+    {
+        $service = $this->getMockBuilder(EvolutionService::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['post'])
+            ->getMock();
+
+        $service->expects($this->once())
+            ->method('post')
+            ->with(
+                '/message/sendText/test-instance',
+                $this->callback(fn (array $payload): bool => $payload['number'] === '123456789@g.us')
+            )
+            ->willReturn(['status' => 'success']);
+
+        $resource = new Message($service, 'test-instance');
+        $resource->sendText('123456789@g.us', 'Test message', true);
     }
 
     /** @test */

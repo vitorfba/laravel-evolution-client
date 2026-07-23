@@ -37,7 +37,7 @@ class Button
     public function toArray(): array
     {
         $result = [
-            'type' => $this->type,
+            'title' => $this->type,
             'displayText' => $this->displayText,
         ];
 

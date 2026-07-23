@@ -5,6 +5,7 @@
 namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Models;
 
 use PHPUnit\Framework\TestCase;
+use Vitorfba\LaravelEvolutionClient\Models\Button;
 use Vitorfba\LaravelEvolutionClient\Models\Contact;
 use Vitorfba\LaravelEvolutionClient\Models\ContactMessage;
 use Vitorfba\LaravelEvolutionClient\Models\ListMessage;
@@ -103,8 +104,11 @@ class MessageModelTest extends TestCase
         $fullName = 'Test Contact';
         $wuid = '5511888888888';
         $phoneNumber = '5511888888888';
+        $organization = 'Example Inc.';
+        $email = 'contact@example.com';
+        $url = 'https://example.com';
 
-        $contact = new Contact($fullName, $wuid, $phoneNumber);
+        $contact = new Contact($fullName, $wuid, $phoneNumber, $organization, $email, $url);
         $message = new ContactMessage($number, [$contact]);
         $data = $message->toArray();
 
@@ -113,6 +117,13 @@ class MessageModelTest extends TestCase
         $this->assertEquals($fullName, $data['contact'][0]['fullName']);
         $this->assertEquals($wuid, $data['contact'][0]['wuid']);
         $this->assertEquals($phoneNumber, $data['contact'][0]['phoneNumber']);
+        $this->assertEquals($organization, $data['contact'][0]['organization']);
+        $this->assertEquals($email, $data['contact'][0]['email']);
+        $this->assertEquals($url, $data['contact'][0]['url']);
+        $this->assertSame(
+            ['fullName', 'wuid', 'phoneNumber', 'organization', 'email', 'url'],
+            array_keys($data['contact'][0])
+        );
     }
 
     /** @test */
@@ -181,11 +192,26 @@ class MessageModelTest extends TestCase
         $this->assertEquals($description, $data['description']);
         $this->assertEquals($buttonText, $data['buttonText']);
         $this->assertEquals($footerText, $data['footerText']);
-        $this->assertCount(2, $data['sections']);
-        $this->assertEquals('Section 1', $data['sections'][0]['title']);
-        $this->assertEquals('Section 2', $data['sections'][1]['title']);
-        $this->assertCount(2, $data['sections'][0]['rows']);
-        $this->assertCount(2, $data['sections'][1]['rows']);
+        $this->assertArrayNotHasKey('sections', $data);
+        $this->assertCount(2, $data['values']);
+        $this->assertEquals('Section 1', $data['values'][0]['title']);
+        $this->assertEquals('Section 2', $data['values'][1]['title']);
+        $this->assertCount(2, $data['values'][0]['rows']);
+        $this->assertCount(2, $data['values'][1]['rows']);
+    }
+
+    /** @test */
+    public function it_maps_button_type_to_the_openapi_title_field()
+    {
+        $button = new Button('reply', 'Yes', ['id' => 'btn-yes']);
+        $data = $button->toArray();
+
+        $this->assertSame([
+            'title' => 'reply',
+            'displayText' => 'Yes',
+            'id' => 'btn-yes',
+        ], $data);
+        $this->assertArrayNotHasKey('type', $data);
     }
 
     /** @test */

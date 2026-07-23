@@ -80,9 +80,7 @@ class Message
             throw new InvalidArgumentException('Message text is required');
         }
 
-        $recipient = $isGroup
-            ? $phoneNumber . '@g.us'
-            : $this->formatPhoneNumber($phoneNumber);
+        $recipient = $this->formatRecipient($phoneNumber, $isGroup);
 
         $textMessage = new TextMessage(
             $recipient,
@@ -102,11 +100,21 @@ class Message
      */
     protected function formatPhoneNumber(string $phoneNumber): string
     {
-        // Remove any non-digit characters
-        $number = preg_replace('/\D/', '', $phoneNumber);
+        return (string) preg_replace('/\D/', '', $phoneNumber);
+    }
 
-        // Add @ to create a valid recipient id for the API
-        return $number . '@c.us';
+    /**
+     * Format a recipient to be used with the API.
+     */
+    protected function formatRecipient(string $phoneNumber, bool $isGroup): string
+    {
+        if (! $isGroup) {
+            return $this->formatPhoneNumber($phoneNumber);
+        }
+
+        return str_ends_with($phoneNumber, '@g.us')
+            ? $phoneNumber
+            : $phoneNumber . '@g.us';
     }
 
     /**
@@ -163,9 +171,7 @@ class Message
      */
     public function sendLocation(string $phoneNumber, float $latitude, float $longitude, string $name = '', string $address = '', bool $isGroup = false, int $delay = 0): array
     {
-        $recipient = $isGroup
-            ? $phoneNumber . '@g.us'
-            : $this->formatPhoneNumber($phoneNumber);
+        $recipient = $this->formatRecipient($phoneNumber, $isGroup);
 
         $payload = [
             'number' => $recipient,
@@ -206,9 +212,7 @@ class Message
         int $delay = 0,
         bool $isGroup = false
     ): array {
-        $recipient = $isGroup
-            ? $phoneNumber . '@g.us'
-            : $this->formatPhoneNumber($phoneNumber);
+        $recipient = $this->formatRecipient($phoneNumber, $isGroup);
 
         $payload = [
             'number' => $recipient,
@@ -234,9 +238,7 @@ class Message
      */
     public function sendContact(string $phoneNumber, string $contactName, string $contactNumber, bool $isGroup = false): array
     {
-        $recipient = $isGroup
-            ? $phoneNumber . '@g.us'
-            : $this->formatPhoneNumber($phoneNumber);
+        $recipient = $this->formatRecipient($phoneNumber, $isGroup);
 
         $contact = new Contact(
             $contactName,
@@ -266,9 +268,7 @@ class Message
         ?int $delay = null,
         bool $isGroup = false
     ): array {
-        $recipient = $isGroup
-            ? $phoneNumber . '@g.us'
-            : $this->formatPhoneNumber($phoneNumber);
+        $recipient = $this->formatRecipient($phoneNumber, $isGroup);
 
         $pollMessage = new PollMessage(
             $recipient,
@@ -297,9 +297,7 @@ class Message
         ?int $delay = null,
         bool $isGroup = false
     ): array {
-        $recipient = $isGroup
-            ? $phoneNumber . '@g.us'
-            : $this->formatPhoneNumber($phoneNumber);
+        $recipient = $this->formatRecipient($phoneNumber, $isGroup);
 
         $listMessage = new ListMessage(
             $recipient,
@@ -329,9 +327,7 @@ class Message
         ?int $delay = null,
         bool $isGroup = false
     ): array {
-        $recipient = $isGroup
-            ? $phoneNumber . '@g.us'
-            : $this->formatPhoneNumber($phoneNumber);
+        $recipient = $this->formatRecipient($phoneNumber, $isGroup);
 
         $buttonMessage = new ButtonMessage(
             $recipient,
@@ -398,9 +394,7 @@ class Message
      */
     public function sendAudio(string $phoneNumber, string $audio, bool $isGroup = false, int $delay = 1200): array
     {
-        $recipient = $isGroup
-            ? $phoneNumber . '@g.us'
-            : $this->formatPhoneNumber($phoneNumber);
+        $recipient = $this->formatRecipient($phoneNumber, $isGroup);
 
         return $this->service->post("/message/sendWhatsAppAudio/{$this->instanceName}", [
             'number' => $recipient,
@@ -418,9 +412,7 @@ class Message
      */
     public function sendSticker(string $phoneNumber, string $sticker, bool $isGroup = false, int $delay = 1200): array
     {
-        $recipient = $isGroup
-            ? $phoneNumber . '@g.us'
-            : $this->formatPhoneNumber($phoneNumber);
+        $recipient = $this->formatRecipient($phoneNumber, $isGroup);
 
         return $this->service->post("/message/sendSticker/{$this->instanceName}", [
             'number' => $recipient,
@@ -443,9 +435,7 @@ class Message
         ?string $webhookUrl = null,
         bool $isGroup = false
     ): array {
-        $recipient = $isGroup
-            ? $phoneNumber . '@g.us'
-            : $this->formatPhoneNumber($phoneNumber);
+        $recipient = $this->formatRecipient($phoneNumber, $isGroup);
 
         $template = new TemplateMessage(
             $recipient,

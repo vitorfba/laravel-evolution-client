@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-07-23
+
+### Changed
+- Message send payloads use **digit-only** individual recipient numbers and preserve
+  existing `@g.us` group suffixes (no more `@c.us` suffix on send).
+- List messages emit the OpenAPI **`values`** field while continuing to accept `$sections`
+  in the PHP API.
+- Button payloads map the constructor's `$type` argument to the OpenAPI **`title`** field.
+- Chat resource aligned to Evolution API v2:
+  - `all()` / `find()` / `messages()` are deprecated wrappers over `findChats` / `findMessages`.
+  - `deleteMessageForEveryone()` uses `DELETE /chat/deleteMessageForEveryone/{instance}`.
+  - Added `EvolutionService::deleteJson()` for DELETE requests with JSON bodies.
+  - Chat helpers use digits-only + `toJid()` (`@s.whatsapp.net`).
+
+### Removed
+- `Chat::clearMessages()` and the old `Chat::delete()` path (`/chat/delete`) — not present
+  in Evolution API v2 OpenAPI (would 404).
+
 ## [1.1.2] - 2026-07-23
 
 ### Fixed

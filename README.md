@@ -144,17 +144,24 @@ $result = Evolution::instance('my-instance')->sendText('5511999999999', 'Hello!'
 ```php
 use Vitorfba\LaravelEvolutionClient\Facades\Evolution;
 
-// List all chats
-$chats = Evolution::chat->all();
+// List/filter chats (POST /chat/findChats)
+$chats = Evolution::chat->findChats();
 
-// Find a specific chat
-$chat = Evolution::chat->find('5511999999999');
+// Filter messages (POST /chat/findMessages)
+$messages = Evolution::chat->findMessages([
+    'where' => ['key' => ['remoteJid' => '5511999999999@s.whatsapp.net']],
+]);
 
-// Get messages from a chat
-$messages = Evolution::chat->messages('5511999999999', 20);
+// Filter contacts (POST /chat/findContacts)
+$contacts = Evolution::chat->findContacts();
 
-// Mark a chat as read
-Evolution::chat->markAsRead('5511999999999');
+// Delete a message for everyone (DELETE /chat/deleteMessageForEveryone)
+Evolution::chat->deleteMessageForEveryone('MESSAGE_ID', '5511999999999@s.whatsapp.net', true);
+
+// Mark messages as read
+Evolution::chat->markAsRead([
+    ['remoteJid' => '5511999999999@s.whatsapp.net', 'fromMe' => false, 'id' => 'MESSAGE_ID'],
+]);
 ```
 
 ### Working with Groups
@@ -190,6 +197,9 @@ use Vitorfba\LaravelEvolutionClient\Models\ListSection;
 
 // Send text
 Evolution::message->sendText('5511999999999', 'Hello, how are you?');
+
+// Group ids may be passed bare or with their existing @g.us suffix
+Evolution::message->sendText('123456789@g.us', 'Hello, group!', true);
 
 // Send text with delay and link preview
 Evolution::message->sendText('5511999999999', 'Check out this website: https://example.com', false, 1000, true);

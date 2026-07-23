@@ -229,4 +229,15 @@ class EvolutionService
     {
         return $this->request('DELETE', $endpoint, ['query' => $queryParams]);
     }
+
+    /**
+     * Make a DELETE request with a JSON body to the Evolution API.
+     *
+     *
+     * @throws EvolutionApiException
+     */
+    public function deleteJson(string $endpoint, array $data = []): array
+    {
+        return $this->request('DELETE', $endpoint, ['json' => $data]);
+    }
 }

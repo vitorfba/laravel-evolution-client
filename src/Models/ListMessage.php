@@ -40,7 +40,7 @@ class ListMessage
             'description' => $description,
             'buttonText' => $buttonText,
             'footerText' => $footerText,
-            'sections' => $sectionsArray,
+            'values' => $sectionsArray,
         ];
 
         if ($delay !== null) {
