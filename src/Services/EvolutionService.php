@@ -97,40 +97,104 @@ class EvolutionService
 
         try {
             $response = $this->client->request($method, $url, $options);
-            $body = $response->getBody()->getContents();
+            $body = trim((string) $response->getBody()->getContents());
+
+            // DELETE/logout often returns an empty body with 2xx — treat as success.
+            if ($body === '' || strcasecmp($body, 'null') === 0) {
+                return [];
+            }
+
             $data = json_decode($body, true);
 
             if (json_last_error() !== JSON_ERROR_NONE) {
                 throw new EvolutionApiException('Invalid JSON response from API', 500);
             }
 
-            // Check for API error response
-            if (isset($data['error']) || (isset($data['status']) && $data['status'] === 'error')) {
-                $message = $data['error'] ?? $data['message'] ?? 'Unknown API error';
-                $code = $data['code'] ?? 400;
+            if (! is_array($data)) {
+                return [];
+            }
+
+            if ($this->responseIndicatesError($data)) {
+                $message = $this->extractErrorMessage($data);
+                $code = is_numeric($data['code'] ?? null) ? (int) $data['code'] : 400;
 
                 throw new EvolutionApiException($message, $code);
             }
 
-            return $data ?? [];
+            return $data;
+        } catch (EvolutionApiException $e) {
+            // Do not re-wrap domain exceptions as "Unexpected error".
+            throw $e;
         } catch (GuzzleException $e) {
             $message = $e->getMessage();
             $statusCode = $e->getCode();
 
-            // Try to parse error response
             if ($e instanceof RequestException && $e->hasResponse()) {
                 $errorBody = $e->getResponse()->getBody()->getContents();
                 $errorData = json_decode($errorBody, true);
 
-                if (is_array($errorData) && isset($errorData['error'])) {
-                    $message = $errorData['error'];
+                if (is_array($errorData) && $this->responseIndicatesError($errorData)) {
+                    $message = $this->extractErrorMessage($errorData);
                 }
             }
 
-            throw new EvolutionApiException($message, $statusCode, $e);
+            throw new EvolutionApiException((string) $message, (int) $statusCode, $e);
         } catch (Exception $e) {
-            throw new EvolutionApiException('Unexpected error: ' . $e->getMessage(), $e->getCode(), $e);
+            throw new EvolutionApiException('Unexpected error: ' . $e->getMessage(), (int) $e->getCode(), $e);
         }
+    }
+
+    /**
+     * Evolution frequently returns `"error": false` on success (e.g. logout).
+     * `isset($data['error'])` is true for false, so we must ignore falsy error values.
+     *
+     * @param  array<string, mixed>  $data
+     */
+    protected function responseIndicatesError(array $data): bool
+    {
+        if (array_key_exists('error', $data)) {
+            $error = $data['error'];
+
+            if ($error === false || $error === null || $error === 0 || $error === '0' || $error === '') {
+                return false;
+            }
+
+            if (is_string($error) && strcasecmp($error, 'false') === 0) {
+                return false;
+            }
+
+            return true;
+        }
+
+        $status = $data['status'] ?? null;
+
+        return is_string($status) && strcasecmp($status, 'error') === 0;
+    }
+
+    /**
+     * @param  array<string, mixed>  $data
+     */
+    protected function extractErrorMessage(array $data): string
+    {
+        $error = $data['error'] ?? null;
+
+        if (is_string($error) && trim($error) !== '') {
+            return $error;
+        }
+
+        if (is_array($error)) {
+            $nested = $error['message'] ?? $error['error'] ?? null;
+            if (is_string($nested) && trim($nested) !== '') {
+                return $nested;
+            }
+        }
+
+        $message = $data['message'] ?? null;
+        if (is_string($message) && trim($message) !== '') {
+            return $message;
+        }
+
+        return 'Unknown API error';
     }
 
     /**
