@@ -4,9 +4,9 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Resources;
 
+use PHPUnit\Framework\TestCase;
 use Vitorfba\LaravelEvolutionClient\Resources\Business;
 use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
-use PHPUnit\Framework\TestCase;
 
 class BusinessResourceTest extends TestCase
 {

@@ -4,9 +4,9 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Resources;
 
+use PHPUnit\Framework\TestCase;
 use Vitorfba\LaravelEvolutionClient\Resources\Template;
 use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
-use PHPUnit\Framework\TestCase;
 
 class TemplateResourceTest extends TestCase
 {

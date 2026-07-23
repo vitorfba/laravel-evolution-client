@@ -2,9 +2,9 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Webhook;
 
-use Vitorfba\LaravelEvolutionClient\Events\EvolutionWebhookReceived;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Http\Request;
+use Vitorfba\LaravelEvolutionClient\Events\EvolutionWebhookReceived;
 
 /**
  * Parses inbound Evolution API webhook payloads and exposes them for use.

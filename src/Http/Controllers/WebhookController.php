@@ -2,11 +2,11 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Vitorfba\LaravelEvolutionClient\Jobs\ProcessEvolutionWebhook;
 use Vitorfba\LaravelEvolutionClient\Webhook\WebhookEvent;
 use Vitorfba\LaravelEvolutionClient\Webhook\WebhookProcessor;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 /**
  * Ready-made endpoint for receiving Evolution API webhooks.

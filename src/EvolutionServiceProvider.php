@@ -4,12 +4,12 @@
 
 namespace Vitorfba\LaravelEvolutionClient;
 
-use Vitorfba\LaravelEvolutionClient\Http\Controllers\WebhookController;
-use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
-use Vitorfba\LaravelEvolutionClient\Webhook\WebhookProcessor;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Vitorfba\LaravelEvolutionClient\Http\Controllers\WebhookController;
+use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
+use Vitorfba\LaravelEvolutionClient\Webhook\WebhookProcessor;
 
 class EvolutionServiceProvider extends ServiceProvider
 {

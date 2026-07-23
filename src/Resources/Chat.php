@@ -4,9 +4,9 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Resources;
 
+use InvalidArgumentException;
 use Vitorfba\LaravelEvolutionClient\Exceptions\EvolutionApiException;
 use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
-use InvalidArgumentException;
 
 class Chat
 {

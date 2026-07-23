@@ -2,8 +2,8 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Webhook;
 
-use Vitorfba\LaravelEvolutionClient\Webhook\WebhookEvent;
 use PHPUnit\Framework\TestCase;
+use Vitorfba\LaravelEvolutionClient\Webhook\WebhookEvent;
 
 class WebhookEventTest extends TestCase
 {

@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-07-23
+
+### Added
+- First public release under **`vitorfba/laravel-evolution-client`**.
+
+### Changed
+- Composer package name: `vitorfba/laravel-evolution-client`.
+- PHP namespace: `Happones\LaravelEvolutionClient` → `Vitorfba\LaravelEvolutionClient`
+  (and the corresponding test namespace).
+- Docs, badges, license and agent guides updated to the new package identity.
+
 ## [3.0.2] - 2026-07-08
 
 ### Fixed

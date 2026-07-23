@@ -2,10 +2,10 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Resources;
 
+use Mockery;
 use Vitorfba\LaravelEvolutionClient\Resources\OpenAIBot;
 use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
 use Vitorfba\LaravelEvolutionClient\Tests\TestCase;
-use Mockery;
 
 class OpenAIBotResourceTest extends TestCase
 {

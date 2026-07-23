@@ -4,8 +4,8 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Services;
 
-use Vitorfba\LaravelEvolutionClient\Services\WebSocketClient;
 use PHPUnit\Framework\TestCase;
+use Vitorfba\LaravelEvolutionClient\Services\WebSocketClient;
 
 class WebSocketClientTest extends TestCase
 {

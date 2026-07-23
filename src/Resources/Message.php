@@ -4,6 +4,7 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Resources;
 
+use InvalidArgumentException;
 use Vitorfba\LaravelEvolutionClient\Exceptions\EvolutionApiException;
 use Vitorfba\LaravelEvolutionClient\Models\ButtonMessage;
 use Vitorfba\LaravelEvolutionClient\Models\Contact;
@@ -15,7 +16,6 @@ use Vitorfba\LaravelEvolutionClient\Models\StatusMessage;
 use Vitorfba\LaravelEvolutionClient\Models\TemplateMessage;
 use Vitorfba\LaravelEvolutionClient\Models\TextMessage;
 use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
-use InvalidArgumentException;
 
 class Message
 {

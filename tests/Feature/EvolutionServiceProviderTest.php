@@ -4,10 +4,10 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Tests\Feature;
 
+use Orchestra\Testbench\TestCase;
 use Vitorfba\LaravelEvolutionClient\EvolutionApiClient;
 use Vitorfba\LaravelEvolutionClient\EvolutionServiceProvider;
 use Vitorfba\LaravelEvolutionClient\Facades\Evolution;
-use Orchestra\Testbench\TestCase;
 
 class EvolutionServiceProviderTest extends TestCase
 {

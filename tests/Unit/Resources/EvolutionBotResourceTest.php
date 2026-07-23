@@ -2,10 +2,10 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Resources;
 
-use Vitorfba\LaravelEvolutionClient\Resources\EvolutionBot;
-use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Vitorfba\LaravelEvolutionClient\Resources\EvolutionBot;
+use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
 
 class EvolutionBotResourceTest extends TestCase
 {

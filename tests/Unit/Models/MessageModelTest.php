@@ -4,6 +4,7 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Models;
 
+use PHPUnit\Framework\TestCase;
 use Vitorfba\LaravelEvolutionClient\Models\Contact;
 use Vitorfba\LaravelEvolutionClient\Models\ContactMessage;
 use Vitorfba\LaravelEvolutionClient\Models\ListMessage;
@@ -16,7 +17,6 @@ use Vitorfba\LaravelEvolutionClient\Models\ReactionMessage;
 use Vitorfba\LaravelEvolutionClient\Models\StatusMessage;
 use Vitorfba\LaravelEvolutionClient\Models\TemplateMessage;
 use Vitorfba\LaravelEvolutionClient\Models\TextMessage;
-use PHPUnit\Framework\TestCase;
 
 class MessageModelTest extends TestCase
 {

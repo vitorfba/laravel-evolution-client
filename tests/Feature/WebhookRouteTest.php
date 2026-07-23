@@ -2,11 +2,11 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Tests\Feature;
 
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Event;
 use Vitorfba\LaravelEvolutionClient\Events\EvolutionWebhookReceived;
 use Vitorfba\LaravelEvolutionClient\Jobs\ProcessEvolutionWebhook;
 use Vitorfba\LaravelEvolutionClient\Tests\TestCase;
-use Illuminate\Support\Facades\Bus;
-use Illuminate\Support\Facades\Event;
 
 class WebhookRouteTest extends TestCase
 {

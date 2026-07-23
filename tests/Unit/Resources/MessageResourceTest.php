@@ -8,13 +8,13 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Vitorfba\LaravelEvolutionClient\Models\Button;
 use Vitorfba\LaravelEvolutionClient\Models\ListRow;
 use Vitorfba\LaravelEvolutionClient\Models\ListSection;
 use Vitorfba\LaravelEvolutionClient\Resources\Message;
 use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
-use InvalidArgumentException;
-use PHPUnit\Framework\TestCase;
 
 class MessageResourceTest extends TestCase
 {

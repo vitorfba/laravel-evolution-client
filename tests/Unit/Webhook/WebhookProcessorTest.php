@@ -2,11 +2,11 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Webhook;
 
+use Illuminate\Events\Dispatcher;
+use PHPUnit\Framework\TestCase;
 use Vitorfba\LaravelEvolutionClient\Events\EvolutionWebhookReceived;
 use Vitorfba\LaravelEvolutionClient\Webhook\WebhookEvent;
 use Vitorfba\LaravelEvolutionClient\Webhook\WebhookProcessor;
-use Illuminate\Events\Dispatcher;
-use PHPUnit\Framework\TestCase;
 
 class WebhookProcessorTest extends TestCase
 {

@@ -2,13 +2,13 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Jobs;
 
-use Vitorfba\LaravelEvolutionClient\Webhook\WebhookEvent;
-use Vitorfba\LaravelEvolutionClient\Webhook\WebhookProcessor;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Vitorfba\LaravelEvolutionClient\Webhook\WebhookEvent;
+use Vitorfba\LaravelEvolutionClient\Webhook\WebhookProcessor;
 
 /**
  * Processes a single Evolution webhook payload off the request lifecycle.

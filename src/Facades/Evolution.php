@@ -4,6 +4,7 @@
 
 namespace Vitorfba\LaravelEvolutionClient\Facades;
 
+use Illuminate\Support\Facades\Facade;
 use Vitorfba\LaravelEvolutionClient\EvolutionApiClient;
 use Vitorfba\LaravelEvolutionClient\Resources\Business;
 use Vitorfba\LaravelEvolutionClient\Resources\Call;
@@ -19,7 +20,6 @@ use Vitorfba\LaravelEvolutionClient\Resources\Proxy;
 use Vitorfba\LaravelEvolutionClient\Resources\Settings;
 use Vitorfba\LaravelEvolutionClient\Resources\Template;
 use Vitorfba\LaravelEvolutionClient\Resources\WebSocket;
-use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static EvolutionApiClient instance(string $instanceName)

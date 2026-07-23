@@ -5,9 +5,9 @@
 namespace Vitorfba\LaravelEvolutionClient\Tests\Unit\Resources;
 
 use GuzzleHttp\Handler\MockHandler;
+use PHPUnit\Framework\TestCase;
 use Vitorfba\LaravelEvolutionClient\Resources\WebSocket;
 use Vitorfba\LaravelEvolutionClient\Services\EvolutionService;
-use PHPUnit\Framework\TestCase;
 
 class WebSocketResourceTest extends TestCase
 {
